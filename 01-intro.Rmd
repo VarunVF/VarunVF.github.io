@@ -1,0 +1,3 @@
+# Introduction {#intro}
+
+This is a reference: Chapter \@ref(intro)

@@ -1,0 +1,17 @@
+bookdown::gitbook:
+  split_by: section
+  config:
+    toc:
+      collapse: subsection
+      before: |
+        <li><strong><a href="./">VarunVF's Projects</a></strong></li>
+      after: |
+        <li><a href="https://github.com/rstudio/bookdown" target="_blank">Published with bookdown</a></li>
+    download: [pdf, epub, mobi]
+    edit: https://github.com/rstudio/bookdown/edit/main/inst/examples/%s
+    sharing:
+      github: yes
+      twitter: yes
+      facebook: no
+    search:
+      engine: fuse
