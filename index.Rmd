@@ -9,6 +9,8 @@ output:
   #bookdown::pdf_book: default
 ---
 
-# Hello World {-}
+# Hello World {-} {index}
+
+This is a simple website to showcase my projects.
 
 <!-- If you need PDF output, uncomment bookdown::pdf_book above in YAML. You will need a LaTeX installation, e.g., https://yihui.name/tinytex/ -->
