@@ -1,4 +1,6 @@
 jlox
+motivation
+language-features
 data-types
 booleans
 numbers

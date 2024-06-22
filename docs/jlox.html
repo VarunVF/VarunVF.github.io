@@ -78,27 +78,16 @@
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Hello World</a></li>
 <li class="chapter" data-level="1" data-path="jlox.html"><a href="jlox.html"><i class="fa fa-check"></i><b>1</b> jlox</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="jlox.html"><a href="jlox.html#data-types"><i class="fa fa-check"></i><b>1.1</b> Data Types</a>
+<li class="chapter" data-level="1.1" data-path="jlox.html"><a href="jlox.html#motivation"><i class="fa fa-check"></i><b>1.1</b> Motivation</a></li>
+<li class="chapter" data-level="1.2" data-path="jlox.html"><a href="jlox.html#language-features"><i class="fa fa-check"></i><b>1.2</b> Language Features</a>
 <ul>
-<li class="chapter" data-level="1.1.1" data-path="jlox.html"><a href="jlox.html#booleans"><i class="fa fa-check"></i><b>1.1.1</b> Booleans</a></li>
-<li class="chapter" data-level="1.1.2" data-path="jlox.html"><a href="jlox.html#numbers"><i class="fa fa-check"></i><b>1.1.2</b> Numbers</a></li>
-<li class="chapter" data-level="1.1.3" data-path="jlox.html"><a href="jlox.html#strings"><i class="fa fa-check"></i><b>1.1.3</b> Strings</a></li>
-<li class="chapter" data-level="1.1.4" data-path="jlox.html"><a href="jlox.html#nil"><i class="fa fa-check"></i><b>1.1.4</b> nil</a></li>
+<li class="chapter" data-level="1.2.1" data-path="jlox.html"><a href="jlox.html#data-types"><i class="fa fa-check"></i><b>1.2.1</b> Data Types</a></li>
+<li class="chapter" data-level="1.2.2" data-path="jlox.html"><a href="jlox.html#expressions"><i class="fa fa-check"></i><b>1.2.2</b> Expressions</a></li>
+<li class="chapter" data-level="1.2.3" data-path="jlox.html"><a href="jlox.html#control-flow"><i class="fa fa-check"></i><b>1.2.3</b> Control Flow</a></li>
+<li class="chapter" data-level="1.2.4" data-path="jlox.html"><a href="jlox.html#functions"><i class="fa fa-check"></i><b>1.2.4</b> Functions</a></li>
+<li class="chapter" data-level="1.2.5" data-path="jlox.html"><a href="jlox.html#classes"><i class="fa fa-check"></i><b>1.2.5</b> Classes</a></li>
+<li class="chapter" data-level="1.2.6" data-path="jlox.html"><a href="jlox.html#comments"><i class="fa fa-check"></i><b>1.2.6</b> Comments</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="jlox.html"><a href="jlox.html#expressions"><i class="fa fa-check"></i><b>1.2</b> Expressions</a>
-<ul>
-<li class="chapter" data-level="1.2.1" data-path="jlox.html"><a href="jlox.html#mathematical-expressions"><i class="fa fa-check"></i><b>1.2.1</b> Mathematical Expressions</a></li>
-<li class="chapter" data-level="1.2.2" data-path="jlox.html"><a href="jlox.html#comparisons"><i class="fa fa-check"></i><b>1.2.2</b> Comparisons</a></li>
-<li class="chapter" data-level="1.2.3" data-path="jlox.html"><a href="jlox.html#logical-expressions"><i class="fa fa-check"></i><b>1.2.3</b> Logical Expressions</a></li>
-<li class="chapter" data-level="1.2.4" data-path="jlox.html"><a href="jlox.html#variables"><i class="fa fa-check"></i><b>1.2.4</b> Variables</a></li>
-</ul></li>
-<li class="chapter" data-level="1.3" data-path="jlox.html"><a href="jlox.html#control-flow"><i class="fa fa-check"></i><b>1.3</b> Control Flow</a></li>
-<li class="chapter" data-level="1.4" data-path="jlox.html"><a href="jlox.html#functions"><i class="fa fa-check"></i><b>1.4</b> Functions</a></li>
-<li class="chapter" data-level="1.5" data-path="jlox.html"><a href="jlox.html#classes"><i class="fa fa-check"></i><b>1.5</b> Classes</a>
-<ul>
-<li class="chapter" data-level="1.5.1" data-path="jlox.html"><a href="jlox.html#inheritance"><i class="fa fa-check"></i><b>1.5.1</b> Inheritance</a></li>
-</ul></li>
-<li class="chapter" data-level="1.6" data-path="jlox.html"><a href="jlox.html#comments"><i class="fa fa-check"></i><b>1.6</b> Comments</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="_blank">Published with bookdown</a></li>
@@ -122,43 +111,56 @@
             <section class="normal" id="section-">
 <div id="jlox" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">Chapter 1</span> jlox<a href="jlox.html#jlox" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>jlox is an implementation of the Lox programming language, written in Java.
+<p><a href="https://github.com/VarunVF/jlox">jlox</a> is my implementation of the Lox programming language, written in Java.
 It uses the tree-walk interpreter from the <a href="https://craftinginterpreters.com">Crafting Interpreters</a> book.</p>
+<p>My jlox is currently still a work in progress.</p>
 <hr />
-<div id="data-types" class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> Data Types<a href="jlox.html#data-types" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="booleans" class="section level3 hasAnchor" number="1.1.1">
-<h3><span class="header-section-number">1.1.1</span> Booleans<a href="jlox.html#booleans" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="motivation" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Motivation<a href="jlox.html#motivation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Over time, programming languages have become more and more abstract.
+As such, the code we write has gotten closer and closer to spoken language.</p>
+<p>This is a trend that I believe will only continue in future years, especially with the development of <a href="https://en.wikipedia.org/wiki/Artificial_intelligence">Artificial Intelligence (AI)</a> that is able to process inputs as high-level as natural language.
+Even the practice of designing and refining the prompts provided to LLMs is somewhat akin to programming (<a href="https://en.wikipedia.org/wiki/Prompt_engineering">prompt engineering</a>).</p>
+<p>It can be easy to take for granted the amount of work that high-level programming languages perform for us behind the scenes. Wanting to know more about how they really work, I took an interest in language interpreters and compilers.</p>
+</div>
+<div id="language-features" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Language Features<a href="jlox.html#language-features" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="data-types" class="section level3 hasAnchor" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> Data Types<a href="jlox.html#data-types" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Lox features several built-in data types.</p>
+<div id="booleans" class="section level4 hasAnchor" number="1.2.1.1">
+<h4><span class="header-section-number">1.2.1.1</span> Booleans<a href="jlox.html#booleans" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <pre><code>true;
 false;</code></pre>
 </div>
-<div id="numbers" class="section level3 hasAnchor" number="1.1.2">
-<h3><span class="header-section-number">1.1.2</span> Numbers<a href="jlox.html#numbers" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="numbers" class="section level4 hasAnchor" number="1.2.1.2">
+<h4><span class="header-section-number">1.2.1.2</span> Numbers<a href="jlox.html#numbers" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Lox uses only floating-point numbers.</p>
 <pre><code>wholeNumber = 34;           // 34.0
 fractionalNumber = 12.5;    // 12.5</code></pre>
 </div>
-<div id="strings" class="section level3 hasAnchor" number="1.1.3">
-<h3><span class="header-section-number">1.1.3</span> Strings<a href="jlox.html#strings" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="strings" class="section level4 hasAnchor" number="1.2.1.3">
+<h4><span class="header-section-number">1.2.1.3</span> Strings<a href="jlox.html#strings" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <pre><code>&quot;Hello, world!&quot;;
 &quot;&quot;;     // An empty string.</code></pre>
 </div>
-<div id="nil" class="section level3 hasAnchor" number="1.1.4">
-<h3><span class="header-section-number">1.1.4</span> nil<a href="jlox.html#nil" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><code>nil</code> represents no value, similar to <code>null</code> in other languages.</p>
+<div id="nil" class="section level4 hasAnchor" number="1.2.1.4">
+<h4><span class="header-section-number">1.2.1.4</span> nil<a href="jlox.html#nil" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><code>nil</code> represents no value, similar to <code>null</code> in other languages.
+It shows up in several places such as void functions and uninitialised variables.</p>
 </div>
 </div>
-<div id="expressions" class="section level2 hasAnchor" number="1.2">
-<h2><span class="header-section-number">1.2</span> Expressions<a href="jlox.html#expressions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="mathematical-expressions" class="section level3 hasAnchor" number="1.2.1">
-<h3><span class="header-section-number">1.2.1</span> Mathematical Expressions<a href="jlox.html#mathematical-expressions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="expressions" class="section level3 hasAnchor" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> Expressions<a href="jlox.html#expressions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="mathematical-expressions" class="section level4 hasAnchor" number="1.2.2.1">
+<h4><span class="header-section-number">1.2.2.1</span> Mathematical Expressions<a href="jlox.html#mathematical-expressions" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>jlox features common numeric operations and negation:</p>
 <pre><code>a + b - a;
 a * b / c;
 -value;</code></pre>
 </div>
-<div id="comparisons" class="section level3 hasAnchor" number="1.2.2">
-<h3><span class="header-section-number">1.2.2</span> Comparisons<a href="jlox.html#comparisons" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="comparisons" class="section level4 hasAnchor" number="1.2.2.2">
+<h4><span class="header-section-number">1.2.2.2</span> Comparisons<a href="jlox.html#comparisons" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Numbers can be compared with the usual comparison operators <code>&lt;</code> <code>&gt;</code> <code>&lt;=</code> <code>&gt;=</code>:</p>
 <pre><code>1 &lt;= 2;             // true</code></pre>
 <p>We can test for equality or inequality with <code>==</code> and <code>!=</code>:</p>
@@ -167,21 +169,21 @@ a * b / c;
 &quot;42&quot; == 42;         // false</code></pre>
 <p>Different types are never equivalent.</p>
 </div>
-<div id="logical-expressions" class="section level3 hasAnchor" number="1.2.3">
-<h3><span class="header-section-number">1.2.3</span> Logical Expressions<a href="jlox.html#logical-expressions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="logical-expressions" class="section level4 hasAnchor" number="1.2.2.3">
+<h4><span class="header-section-number">1.2.2.3</span> Logical Expressions<a href="jlox.html#logical-expressions" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <pre><code>!true;              // false
 true or false;      // true
 true and false;     // false</code></pre>
 </div>
-<div id="variables" class="section level3 hasAnchor" number="1.2.4">
-<h3><span class="header-section-number">1.2.4</span> Variables<a href="jlox.html#variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="variables" class="section level4 hasAnchor" number="1.2.2.4">
+<h4><span class="header-section-number">1.2.2.4</span> Variables<a href="jlox.html#variables" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Declare variables with <code>var</code>:</p>
 <pre><code>var message = &quot;Hello&quot;;
 var uninitialisedVariable;      // set to nil</code></pre>
 </div>
 </div>
-<div id="control-flow" class="section level2 hasAnchor" number="1.3">
-<h2><span class="header-section-number">1.3</span> Control Flow<a href="jlox.html#control-flow" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="control-flow" class="section level3 hasAnchor" number="1.2.3">
+<h3><span class="header-section-number">1.2.3</span> Control Flow<a href="jlox.html#control-flow" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><code>if</code> and <code>else</code> statements:</p>
 <pre><code>if (condition) {
     // ...
@@ -196,16 +198,16 @@ for (var i = 0; i &lt; 5; i = i + 1) {
     print i;
 }</code></pre>
 </div>
-<div id="functions" class="section level2 hasAnchor" number="1.4">
-<h2><span class="header-section-number">1.4</span> Functions<a href="jlox.html#functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="functions" class="section level3 hasAnchor" number="1.2.4">
+<h3><span class="header-section-number">1.2.4</span> Functions<a href="jlox.html#functions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Functions are first class in Lox, and return <code>nil</code> by default.</p>
 <pre><code>fun sum(first, second) {
     return first + second;
 }
 sum(1, 2);</code></pre>
 </div>
-<div id="classes" class="section level2 hasAnchor" number="1.5">
-<h2><span class="header-section-number">1.5</span> Classes<a href="jlox.html#classes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="classes" class="section level3 hasAnchor" number="1.2.5">
+<h3><span class="header-section-number">1.2.5</span> Classes<a href="jlox.html#classes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Class methods are declared without the <code>fun</code> keyword.</p>
 <pre><code>class Entity {
     move() {
@@ -229,8 +231,8 @@ myEntity.name = &quot;Bob&quot;;</code></pre>
 
 var myEntity = Entity(57, &quot;Bob&quot;);</code></pre>
 <p>The arguments passed to the class are forwarded to the <code>init</code> method.</p>
-<div id="inheritance" class="section level3 hasAnchor" number="1.5.1">
-<h3><span class="header-section-number">1.5.1</span> Inheritance<a href="jlox.html#inheritance" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="inheritance" class="section level4 hasAnchor" number="1.2.5.1">
+<h4><span class="header-section-number">1.2.5.1</span> Inheritance<a href="jlox.html#inheritance" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Lox supports single inheritance using the <code>&lt;</code> operator.</p>
 <pre><code>class Alien &lt; Entity {
     init(age, name, planet) {
@@ -241,10 +243,11 @@ var myEntity = Entity(57, &quot;Bob&quot;);</code></pre>
 <p>We can access methods of the superclass using <code>super</code>.</p>
 </div>
 </div>
-<div id="comments" class="section level2 hasAnchor" number="1.6">
-<h2><span class="header-section-number">1.6</span> Comments<a href="jlox.html#comments" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="comments" class="section level3 hasAnchor" number="1.2.6">
+<h3><span class="header-section-number">1.2.6</span> Comments<a href="jlox.html#comments" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>jlox allows single-line comments with <code>//</code> or C-style block comments with <code>/**/</code>.</p>
 
+</div>
 </div>
 </div>
             </section>

@@ -1,37 +1,52 @@
 # jlox {#jlox}
 
-jlox is an implementation of the Lox programming language, written in Java.
+[jlox](https://github.com/VarunVF/jlox) is my implementation of the Lox programming language, written in Java.
 It uses the tree-walk interpreter from the [Crafting Interpreters](https://craftinginterpreters.com) book.
+
+My jlox is currently still a work in progress.
 
 ---
 
-## Data Types
+## Motivation
+Over time, programming languages have become more and more abstract.
+As such, the code we write has gotten closer and closer to spoken language.
 
-### Booleans
+This is a trend that I believe will only continue in future years, especially with the development of [Artificial Intelligence (AI)](https://en.wikipedia.org/wiki/Artificial_intelligence) that is able to process inputs as high-level as natural language.
+Even the practice of designing and refining the prompts provided to LLMs is somewhat akin to programming ([prompt engineering](https://en.wikipedia.org/wiki/Prompt_engineering)).
+
+It can be easy to take for granted the amount of work that high-level programming languages perform for us behind the scenes. Wanting to know more about how they really work, I took an interest in language interpreters and compilers.
+
+## Language Features
+
+### Data Types
+Lox features several built-in data types.
+
+#### Booleans
 ```
 true;
 false;
 ```
 
-### Numbers
+#### Numbers
 Lox uses only floating-point numbers.
 ```
 wholeNumber = 34;           // 34.0
 fractionalNumber = 12.5;    // 12.5
 ```
 
-### Strings
+#### Strings
 ```
 "Hello, world!";
 "";     // An empty string.
 ```
 
-### nil
+#### nil
 `nil` represents no value, similar to `null` in other languages.
+It shows up in several places such as void functions and uninitialised variables.
 
 
-## Expressions
-### Mathematical Expressions
+### Expressions
+#### Mathematical Expressions
 jlox features common numeric operations and negation:
 ```
 a + b - a;
@@ -39,7 +54,7 @@ a * b / c;
 -value;
 ```
 
-### Comparisons
+#### Comparisons
 Numbers can be compared with the usual comparison operators `<` `>` `<=` `>=`:
 ```
 1 <= 2;             // true
@@ -52,21 +67,21 @@ We can test for equality or inequality with `==` and `!=`:
 ```
 Different types are never equivalent.
 
-### Logical Expressions
+#### Logical Expressions
 ```
 !true;              // false
 true or false;      // true
 true and false;     // false
 ```
 
-### Variables
+#### Variables
 Declare variables with `var`:
 ```
 var message = "Hello";
 var uninitialisedVariable;      // set to nil
 ```
 
-## Control Flow
+### Control Flow
 `if` and `else` statements:
 ```
 if (condition) {
@@ -86,7 +101,7 @@ for (var i = 0; i < 5; i = i + 1) {
 }
 ```
 
-## Functions
+### Functions
 Functions are first class in Lox, and return `nil` by default.
 ```
 fun sum(first, second) {
@@ -95,7 +110,7 @@ fun sum(first, second) {
 sum(1, 2);
 ```
 
-## Classes
+### Classes
 Class methods are declared without the `fun` keyword.
 ```
 class Entity {
@@ -127,7 +142,7 @@ var myEntity = Entity(57, "Bob");
 ```
 The arguments passed to the class are forwarded to the `init` method.
 
-### Inheritance
+#### Inheritance
 Lox supports single inheritance using the `<` operator.
 ```
 class Alien < Entity {
@@ -139,5 +154,5 @@ class Alien < Entity {
 ```
 We can access methods of the superclass using `super`.
 
-## Comments
+### Comments
 jlox allows single-line comments with `//` or C-style block comments with `/**/`.
