@@ -9,7 +9,7 @@ output:
   #bookdown::pdf_book: default
 ---
 
-# Hello World {-} {index}
+# Hello World {-}
 
 This is a simple website to showcase my projects.
 

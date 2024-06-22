@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 1 jlox | VarunVF’s Projects</title>
+  <meta name="description" content="Chapter 1 jlox | VarunVF’s Projects" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 1 jlox | VarunVF’s Projects" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 1 jlox | VarunVF’s Projects" />
+  
+  
+  
+
+<meta name="author" content="VarunVF" />
+
+
+<meta name="date" content="2024-06-22" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><strong><a href="./">VarunVF's Projects</a></strong></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Hello World</a></li>
+<li class="chapter" data-level="1" data-path="jlox.html"><a href="jlox.html"><i class="fa fa-check"></i><b>1</b> jlox</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="jlox.html"><a href="jlox.html#data-types"><i class="fa fa-check"></i><b>1.1</b> Data Types</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="jlox.html"><a href="jlox.html#booleans"><i class="fa fa-check"></i><b>1.1.1</b> Booleans</a></li>
+<li class="chapter" data-level="1.1.2" data-path="jlox.html"><a href="jlox.html#numbers"><i class="fa fa-check"></i><b>1.1.2</b> Numbers</a></li>
+<li class="chapter" data-level="1.1.3" data-path="jlox.html"><a href="jlox.html#strings"><i class="fa fa-check"></i><b>1.1.3</b> Strings</a></li>
+<li class="chapter" data-level="1.1.4" data-path="jlox.html"><a href="jlox.html#nil"><i class="fa fa-check"></i><b>1.1.4</b> nil</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="jlox.html"><a href="jlox.html#expressions"><i class="fa fa-check"></i><b>1.2</b> Expressions</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="jlox.html"><a href="jlox.html#mathematical-expressions"><i class="fa fa-check"></i><b>1.2.1</b> Mathematical Expressions</a></li>
+<li class="chapter" data-level="1.2.2" data-path="jlox.html"><a href="jlox.html#comparisons"><i class="fa fa-check"></i><b>1.2.2</b> Comparisons</a></li>
+<li class="chapter" data-level="1.2.3" data-path="jlox.html"><a href="jlox.html#logical-expressions"><i class="fa fa-check"></i><b>1.2.3</b> Logical Expressions</a></li>
+<li class="chapter" data-level="1.2.4" data-path="jlox.html"><a href="jlox.html#variables"><i class="fa fa-check"></i><b>1.2.4</b> Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="jlox.html"><a href="jlox.html#control-flow"><i class="fa fa-check"></i><b>1.3</b> Control Flow</a></li>
+<li class="chapter" data-level="1.4" data-path="jlox.html"><a href="jlox.html#functions"><i class="fa fa-check"></i><b>1.4</b> Functions</a></li>
+<li class="chapter" data-level="1.5" data-path="jlox.html"><a href="jlox.html#classes"><i class="fa fa-check"></i><b>1.5</b> Classes</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="jlox.html"><a href="jlox.html#inheritance"><i class="fa fa-check"></i><b>1.5.1</b> Inheritance</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="jlox.html"><a href="jlox.html#comments"><i class="fa fa-check"></i><b>1.6</b> Comments</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="_blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">VarunVF’s Projects</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="jlox" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Chapter 1</span> jlox<a href="jlox.html#jlox" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>jlox is an implementation of the Lox programming language, written in Java.
+It uses the tree-walk interpreter from the <a href="https://craftinginterpreters.com">Crafting Interpreters</a> book.</p>
+<hr />
+<div id="data-types" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Data Types<a href="jlox.html#data-types" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="booleans" class="section level3 hasAnchor" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> Booleans<a href="jlox.html#booleans" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<pre><code>true;
+false;</code></pre>
+</div>
+<div id="numbers" class="section level3 hasAnchor" number="1.1.2">
+<h3><span class="header-section-number">1.1.2</span> Numbers<a href="jlox.html#numbers" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Lox uses only floating-point numbers.</p>
+<pre><code>wholeNumber = 34;           // 34.0
+fractionalNumber = 12.5;    // 12.5</code></pre>
+</div>
+<div id="strings" class="section level3 hasAnchor" number="1.1.3">
+<h3><span class="header-section-number">1.1.3</span> Strings<a href="jlox.html#strings" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<pre><code>&quot;Hello, world!&quot;;
+&quot;&quot;;     // An empty string.</code></pre>
+</div>
+<div id="nil" class="section level3 hasAnchor" number="1.1.4">
+<h3><span class="header-section-number">1.1.4</span> nil<a href="jlox.html#nil" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><code>nil</code> represents no value, similar to <code>null</code> in other languages.</p>
+</div>
+</div>
+<div id="expressions" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Expressions<a href="jlox.html#expressions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="mathematical-expressions" class="section level3 hasAnchor" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> Mathematical Expressions<a href="jlox.html#mathematical-expressions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>jlox features common numeric operations and negation:</p>
+<pre><code>a + b - a;
+a * b / c;
+-value;</code></pre>
+</div>
+<div id="comparisons" class="section level3 hasAnchor" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> Comparisons<a href="jlox.html#comparisons" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Numbers can be compared with the usual comparison operators <code>&lt;</code> <code>&gt;</code> <code>&lt;=</code> <code>&gt;=</code>:</p>
+<pre><code>1 &lt;= 2;             // true</code></pre>
+<p>We can test for equality or inequality with <code>==</code> and <code>!=</code>:</p>
+<pre><code>1 == 1;             // true
+&quot;foo&quot; != &quot;bar&quot;;     // true
+&quot;42&quot; == 42;         // false</code></pre>
+<p>Different types are never equivalent.</p>
+</div>
+<div id="logical-expressions" class="section level3 hasAnchor" number="1.2.3">
+<h3><span class="header-section-number">1.2.3</span> Logical Expressions<a href="jlox.html#logical-expressions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<pre><code>!true;              // false
+true or false;      // true
+true and false;     // false</code></pre>
+</div>
+<div id="variables" class="section level3 hasAnchor" number="1.2.4">
+<h3><span class="header-section-number">1.2.4</span> Variables<a href="jlox.html#variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Declare variables with <code>var</code>:</p>
+<pre><code>var message = &quot;Hello&quot;;
+var uninitialisedVariable;      // set to nil</code></pre>
+</div>
+</div>
+<div id="control-flow" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Control Flow<a href="jlox.html#control-flow" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><code>if</code> and <code>else</code> statements:</p>
+<pre><code>if (condition) {
+    // ...
+} else {
+    // ...
+}</code></pre>
+<p><code>while</code> and <code>for</code> loops:</p>
+<pre><code>while (num &gt; 0) {
+    num = num - 1;
+}
+for (var i = 0; i &lt; 5; i = i + 1) {
+    print i;
+}</code></pre>
+</div>
+<div id="functions" class="section level2 hasAnchor" number="1.4">
+<h2><span class="header-section-number">1.4</span> Functions<a href="jlox.html#functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Functions are first class in Lox, and return <code>nil</code> by default.</p>
+<pre><code>fun sum(first, second) {
+    return first + second;
+}
+sum(1, 2);</code></pre>
+</div>
+<div id="classes" class="section level2 hasAnchor" number="1.5">
+<h2><span class="header-section-number">1.5</span> Classes<a href="jlox.html#classes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Class methods are declared without the <code>fun</code> keyword.</p>
+<pre><code>class Entity {
+    move() {
+        print &quot;Entity moved!&quot;;
+    }
+}
+
+var myEntity = Entity();      // Created instance of Entity class</code></pre>
+<p>We can assign fields, or create them if they don’t already exist:</p>
+<pre><code>myEntity.age = 57;
+myEntity.name = &quot;Bob&quot;;</code></pre>
+<p>We can also do this in the <code>init</code> method which is called when the object is constructed:</p>
+<pre><code>class Entity {
+    init(age, name) {
+        this.age = age;
+        this.name = name;
+    }
+
+    // ...
+}
+
+var myEntity = Entity(57, &quot;Bob&quot;);</code></pre>
+<p>The arguments passed to the class are forwarded to the <code>init</code> method.</p>
+<div id="inheritance" class="section level3 hasAnchor" number="1.5.1">
+<h3><span class="header-section-number">1.5.1</span> Inheritance<a href="jlox.html#inheritance" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Lox supports single inheritance using the <code>&lt;</code> operator.</p>
+<pre><code>class Alien &lt; Entity {
+    init(age, name, planet) {
+        super.init(age, name);
+        this.planet = planet;
+    }
+}</code></pre>
+<p>We can access methods of the superclass using <code>super</code>.</p>
+</div>
+</div>
+<div id="comments" class="section level2 hasAnchor" number="1.6">
+<h2><span class="header-section-number">1.6</span> Comments<a href="jlox.html#comments" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>jlox allows single-line comments with <code>//</code> or C-style block comments with <code>/**/</code>.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/VarunVF/VarunVF.github.io/edit/main/01-jlox.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["VarunVF's-Projects.pdf", "VarunVF's-Projects.epub", "VarunVF's-Projects.mobi"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
