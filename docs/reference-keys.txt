@@ -17,3 +17,10 @@ classes
 inheritance
 comments
 myOS
+background-information
+how-a-computer-starts-up
+how-the-bios-finds-an-os-2-ways
+directives-used
+memory-segmentation
+bootloader-and-kernel
+assembly

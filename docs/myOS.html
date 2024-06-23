@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 myOS | VarunVF’s Projects</title>
-  <meta name="description" content="Chapter 2 myOS | VarunVF’s Projects" />
+  <title>Chapter 2 Operating Systems | VarunVF’s Projects</title>
+  <meta name="description" content="Chapter 2 Operating Systems | VarunVF’s Projects" />
   <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 myOS | VarunVF’s Projects" />
+  <meta property="og:title" content="Chapter 2 Operating Systems | VarunVF’s Projects" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 myOS | VarunVF’s Projects" />
+  <meta name="twitter:title" content="Chapter 2 Operating Systems | VarunVF’s Projects" />
   
   
   
@@ -23,7 +23,7 @@
 <meta name="author" content="VarunVF" />
 
 
-<meta name="date" content="2024-06-22" />
+<meta name="date" content="2024-06-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -89,7 +89,18 @@
 <li class="chapter" data-level="1.2.6" data-path="jlox.html"><a href="jlox.html#comments"><i class="fa fa-check"></i><b>1.2.6</b> Comments</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="myOS.html"><a href="myOS.html"><i class="fa fa-check"></i><b>2</b> myOS</a></li>
+<li class="chapter" data-level="2" data-path="myOS.html"><a href="myOS.html"><i class="fa fa-check"></i><b>2</b> Operating Systems</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="myOS.html"><a href="myOS.html#background-information"><i class="fa fa-check"></i><b>2.1</b> Background Information</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="myOS.html"><a href="myOS.html#how-a-computer-starts-up"><i class="fa fa-check"></i><b>2.1.1</b> How a computer starts up</a></li>
+<li class="chapter" data-level="2.1.2" data-path="myOS.html"><a href="myOS.html#how-the-bios-finds-an-os-2-ways"><i class="fa fa-check"></i><b>2.1.2</b> How the BIOS finds an OS (2 ways):</a></li>
+<li class="chapter" data-level="2.1.3" data-path="myOS.html"><a href="myOS.html#directives-used"><i class="fa fa-check"></i><b>2.1.3</b> Directives Used</a></li>
+<li class="chapter" data-level="2.1.4" data-path="myOS.html"><a href="myOS.html#memory-segmentation"><i class="fa fa-check"></i><b>2.1.4</b> Memory Segmentation</a></li>
+<li class="chapter" data-level="2.1.5" data-path="myOS.html"><a href="myOS.html#bootloader-and-kernel"><i class="fa fa-check"></i><b>2.1.5</b> Bootloader and Kernel</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="myOS.html"><a href="myOS.html#assembly"><i class="fa fa-check"></i><b>2.2</b> Assembly</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="_blank">Published with bookdown</a></li>
 
@@ -111,9 +122,179 @@
 
             <section class="normal" id="section-">
 <div id="myOS" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">Chapter 2</span> myOS<a href="myOS.html#myOS" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<h1><span class="header-section-number">Chapter 2</span> Operating Systems<a href="myOS.html#myOS" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>myOS project description</p>
+<div id="background-information" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Background Information<a href="myOS.html#background-information" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="how-a-computer-starts-up" class="section level3 hasAnchor" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> How a computer starts up<a href="myOS.html#how-a-computer-starts-up" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The sequence is as follows:</p>
+<ul>
+<li>BIOS is copied from a ROM chip into RAM</li>
+<li>BIOS starts executing code
+<ul>
+<li>initialises hardware</li>
+<li>runs some tests (POST = power on self test)</li>
+</ul></li>
+<li>BIOS searches for an OS to start</li>
+<li>BIOS loads and starts the OS</li>
+<li>OS runs</li>
+</ul>
+</div>
+<div id="how-the-bios-finds-an-os-2-ways" class="section level3 hasAnchor" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> How the BIOS finds an OS (2 ways):<a href="myOS.html#how-the-bios-finds-an-os-2-ways" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>LEGACY BOOTING</p>
+<ul>
+<li>BIOS loads first sector of each bootable device
+into memory (at location <code>0x7c00</code>)</li>
+<li>BIOS checks for <code>0xaa55</code> signature
+(last two bytes of the first sector)</li>
+<li>If found, it starts executing code</li>
+</ul>
+<p>EFI</p>
+<ul>
+<li>BIOS looks for a special EFI partition
+which contains some special EFI programs</li>
+<li>OS must be compiled as an EFI programs</li>
+</ul>
+<p>We will use legacy booting for this OS.</p>
+</div>
+<div id="directives-used" class="section level3 hasAnchor" number="2.1.3">
+<h3><span class="header-section-number">2.1.3</span> Directives Used<a href="myOS.html#directives-used" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><code>ORG</code> directive:
+Tell the assembler where we expect our code to be loaded.
+Assembler uses this information to calculate label addresses.</p>
+<p><code>BITS</code> directive:
+Tell the assembler to emit 16/32/64-bit code.</p>
+<p><code>TIMES [number] [instruction/data]</code> directive:
+Repeats given instruction/data a number of times.</p>
+<p><code>$</code>: Memory offset of the current line.</p>
+<p><code>$$</code>: Memory offset of the beginning of the current section.</p>
+</div>
+<div id="memory-segmentation" class="section level3 hasAnchor" number="2.1.4">
+<h3><span class="header-section-number">2.1.4</span> Memory Segmentation<a href="myOS.html#memory-segmentation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The segment and offset addressing scheme for memory can be used. It has the form <code>segment:offset</code>. For example, a memory address could be represented as <code>0x1234:0x5678</code> where <code>0x1234</code> is the segment and <code>0x5678</code> is the offset.</p>
+<p>In this scheme we address memory using two 16-bit values, the segment and the offset.</p>
+<p>Each segment contains 64kb of memory, where each byte can be accessed using the offset value. Segments overlap every 16 bytes.</p>
+<pre><code>real_address = segment * 16 + offset</code></pre>
+<p>This also means there are multiple ways to represent the same absolute memory address.</p>
+<p>In x86 architecture, there are special registers used to specify the actively used segments.</p>
+<pre><code>CS - currently running code segment
+DS - data segment
+SS - stack segment
+ES, FS, GS - extra (data) segments</code></pre>
+<p>In order to access data outside one of these active segments, we need to load that segment into one of these registers.</p>
+<p>The code segment can only be modified by performing a jump.</p>
+<p>Referencing a memory location:</p>
+<pre><code>segment:[base + index * scale + displacement]
 
+segment:        CS, DS, ES, FS, GS, SS
+                if unspecified: SS when base register is BP
+                DS otherwise
+base:           (16 bits) BP/BX
+                (32/64 bits) any general purpose register
+index:          (16 bits) SI/DI
+scale:          (32/64 bits only) 1, 2, 4, 8
+displacement:   a (signed) constant value</code></pre>
+<p>Some limitations:</p>
+<ul>
+<li>Only BP and BX can be used as base registers</li>
+<li>Only SI and ID can be used as index registers</li>
+<li>Constants cannot be directly written to the segment registers. An intermediary register has to be used.</li>
+</ul>
+<p>Most operating systems will switch to 32- or 64-bit mode
+immediately after startup.</p>
+</div>
+<div id="bootloader-and-kernel" class="section level3 hasAnchor" number="2.1.5">
+<h3><span class="header-section-number">2.1.5</span> Bootloader and Kernel<a href="myOS.html#bootloader-and-kernel" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Bootloader:</p>
+<ul>
+<li>loads basic components into memory</li>
+<li>puts system in expected state</li>
+<li>collects information about system</li>
+</ul>
+<p>The bootloader will load the kernel.</p>
+<p>We will write the bootloader in the first sector of the disk,
+and the rest of the operating system (the kernel) will start
+from the second sector onwards.</p>
+</div>
+</div>
+<div id="assembly" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Assembly<a href="myOS.html#assembly" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<pre><code>org 0x7c00
+
+; We need to emit 16-bit code because the CPU always starts in 16-bit mode.
+bits 16
+
+%define ENDL 0x0d, 0x0a
+
+start:
+    jmp main
+
+
+; 
+; Prints a string to the screen.
+; Params:
+;   - ds:si points to string, ASCII, zero-delimited.
+; 
+puts:
+    ; save registers we will modify
+    push si
+    push ax
+
+.loop:
+    lodsb       ; loads next char into al
+    or al, al   ; verify is next char is null
+    jz .done
+
+    mov ah, 0x0e    ; Print Character in TTY Mode
+    mov bh, 0   ; Page Number
+    int 0x10    ; BIOS Interrupt: Video
+    jmp .loop
+.done:
+    pop ax
+    pop si
+    ret
+
+
+
+main:
+    ; setup data segments
+    mov ax, 0   ; can&#39;t write to ds/es directly
+    mov ds, ax
+    mov es, ax
+
+    ; setup stack
+    mov ss, ax
+    mov sp, 0x7c00  ; stack grows downwards from beginning of program
+
+    ; print message
+    mov si, msg_hello
+    call puts
+
+    hlt
+
+.freeze:
+    jmp .freeze
+
+
+
+msg_hello: db &quot;Hello, World!&quot;, ENDL, 0
+
+
+; $-$$: Length of the program so far in bytes.
+
+; The BIOS expects the last two bytes of the first sector are 0xaa55.
+; On a standard 1.44Mb floppy disk, each sector is 512b large.
+; We pad the program up to 510 bytes and then declare the 2 bytes signature.
+
+times 510 - ($-$$) db 0
+dw 0AA55h
+
+
+</code></pre>
+
+</div>
 </div>
             </section>
 

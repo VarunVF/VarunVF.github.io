@@ -1,3 +1,190 @@
-# myOS {#myOS}
+# Operating Systems {#myOS}
 
 myOS project description
+
+## Background Information
+### How a computer starts up
+
+The sequence is as follows:
+
+- BIOS is copied from a ROM chip into RAM
+- BIOS starts executing code
+   - initialises hardware
+   - runs some tests (POST = power on self test)
+- BIOS searches for an OS to start
+- BIOS loads and starts the OS
+- OS runs
+
+### How the BIOS finds an OS (2 ways):
+
+LEGACY BOOTING
+
+- BIOS loads first sector of each bootable device
+  into memory (at location `0x7c00`)
+- BIOS checks for `0xaa55` signature
+  (last two bytes of the first sector)
+- If found, it starts executing code
+
+EFI
+
+- BIOS looks for a special EFI partition
+  which contains some special EFI programs
+- OS must be compiled as an EFI programs
+
+We will use legacy booting for this OS.
+
+
+### Directives Used
+
+`ORG` directive:
+Tell the assembler where we expect our code to be loaded.
+Assembler uses this information to calculate label addresses.
+
+`BITS` directive:
+Tell the assembler to emit 16/32/64-bit code.
+
+`TIMES [number] [instruction/data]` directive:
+Repeats given instruction/data a number of times.
+
+`$`:  Memory offset of the current line.
+
+`$$`: Memory offset of the beginning of the current section.
+
+
+### Memory Segmentation
+
+The segment and offset addressing scheme for memory can be used. It has the form `segment:offset`. For example, a memory address could be represented as `0x1234:0x5678` where `0x1234` is the segment and `0x5678` is the offset.
+
+In this scheme we address memory using two 16-bit values, the segment and the offset.
+
+Each segment contains 64kb of memory, where each byte can be accessed using the offset value. Segments overlap every 16 bytes.
+
+    real_address = segment * 16 + offset
+
+This also means there are multiple ways to represent the same absolute memory address.
+
+In x86 architecture, there are special registers used to specify the actively used segments.
+
+    CS - currently running code segment
+    DS - data segment
+    SS - stack segment
+    ES, FS, GS - extra (data) segments
+
+In order to access data outside one of these active segments, we need to load that segment into one of these registers.
+
+The code segment can only be modified by performing a jump.
+
+Referencing a memory location:
+
+    segment:[base + index * scale + displacement]
+
+    segment:        CS, DS, ES, FS, GS, SS
+                    if unspecified: SS when base register is BP
+                    DS otherwise
+    base:           (16 bits) BP/BX
+                    (32/64 bits) any general purpose register
+    index:          (16 bits) SI/DI
+    scale:          (32/64 bits only) 1, 2, 4, 8
+    displacement:   a (signed) constant value
+
+
+Some limitations:
+
+- Only BP and BX can be used as base registers
+- Only SI and ID can be used as index registers
+- Constants cannot be directly written to the segment registers. An intermediary register has to be used.
+
+Most operating systems will switch to 32- or 64-bit mode
+immediately after startup.
+
+
+### Bootloader and Kernel
+
+Bootloader:
+
+- loads basic components into memory
+- puts system in expected state
+- collects information about system
+
+The bootloader will load the kernel.
+
+We will write the bootloader in the first sector of the disk,
+and the rest of the operating system (the kernel) will start
+from the second sector onwards.
+
+## Assembly
+
+```
+org 0x7c00
+
+; We need to emit 16-bit code because the CPU always starts in 16-bit mode.
+bits 16
+
+%define ENDL 0x0d, 0x0a
+
+start:
+	jmp main
+
+
+; 
+; Prints a string to the screen.
+; Params:
+; 	- ds:si points to string, ASCII, zero-delimited.
+; 
+puts:
+	; save registers we will modify
+	push si
+	push ax
+
+.loop:
+	lodsb		; loads next char into al
+	or al, al	; verify is next char is null
+	jz .done
+
+	mov ah, 0x0e	; Print Character in TTY Mode
+	mov bh, 0	; Page Number
+	int 0x10	; BIOS Interrupt: Video
+	jmp .loop
+.done:
+	pop ax
+	pop si
+	ret
+
+
+
+main:
+	; setup data segments
+	mov ax, 0	; can't write to ds/es directly
+	mov ds, ax
+	mov es, ax
+
+	; setup stack
+	mov ss, ax
+	mov sp, 0x7c00	; stack grows downwards from beginning of program
+
+	; print message
+	mov si, msg_hello
+	call puts
+
+	hlt
+
+.freeze:
+	jmp .freeze
+
+
+
+msg_hello: db "Hello, World!", ENDL, 0
+
+
+; $-$$: Length of the program so far in bytes.
+
+; The BIOS expects the last two bytes of the first sector are 0xaa55.
+; On a standard 1.44Mb floppy disk, each sector is 512b large.
+; We pad the program up to 510 bytes and then declare the 2 bytes signature.
+
+times 510 - ($-$$) db 0
+dw 0AA55h
+
+
+
+```
