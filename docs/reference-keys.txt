@@ -17,10 +17,13 @@ classes
 inheritance
 comments
 myOS
+tools
 background-information
 how-a-computer-starts-up
 how-the-bios-finds-an-os-2-ways
-directives-used
 memory-segmentation
 bootloader-and-kernel
-assembly
+writing-the-code
+directives-used
+writing-assembly-code
+hello-world-1

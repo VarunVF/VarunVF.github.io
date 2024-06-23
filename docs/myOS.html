@@ -91,15 +91,20 @@
 </ul></li>
 <li class="chapter" data-level="2" data-path="myOS.html"><a href="myOS.html"><i class="fa fa-check"></i><b>2</b> Operating Systems</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="myOS.html"><a href="myOS.html#background-information"><i class="fa fa-check"></i><b>2.1</b> Background Information</a>
+<li class="chapter" data-level="2.1" data-path="myOS.html"><a href="myOS.html#tools"><i class="fa fa-check"></i><b>2.1</b> Tools</a></li>
+<li class="chapter" data-level="2.2" data-path="myOS.html"><a href="myOS.html#background-information"><i class="fa fa-check"></i><b>2.2</b> Background Information</a>
 <ul>
-<li class="chapter" data-level="2.1.1" data-path="myOS.html"><a href="myOS.html#how-a-computer-starts-up"><i class="fa fa-check"></i><b>2.1.1</b> How a computer starts up</a></li>
-<li class="chapter" data-level="2.1.2" data-path="myOS.html"><a href="myOS.html#how-the-bios-finds-an-os-2-ways"><i class="fa fa-check"></i><b>2.1.2</b> How the BIOS finds an OS (2 ways):</a></li>
-<li class="chapter" data-level="2.1.3" data-path="myOS.html"><a href="myOS.html#directives-used"><i class="fa fa-check"></i><b>2.1.3</b> Directives Used</a></li>
-<li class="chapter" data-level="2.1.4" data-path="myOS.html"><a href="myOS.html#memory-segmentation"><i class="fa fa-check"></i><b>2.1.4</b> Memory Segmentation</a></li>
-<li class="chapter" data-level="2.1.5" data-path="myOS.html"><a href="myOS.html#bootloader-and-kernel"><i class="fa fa-check"></i><b>2.1.5</b> Bootloader and Kernel</a></li>
+<li class="chapter" data-level="2.2.1" data-path="myOS.html"><a href="myOS.html#how-a-computer-starts-up"><i class="fa fa-check"></i><b>2.2.1</b> How a computer starts up</a></li>
+<li class="chapter" data-level="2.2.2" data-path="myOS.html"><a href="myOS.html#how-the-bios-finds-an-os-2-ways"><i class="fa fa-check"></i><b>2.2.2</b> How the BIOS finds an OS (2 ways):</a></li>
+<li class="chapter" data-level="2.2.3" data-path="myOS.html"><a href="myOS.html#memory-segmentation"><i class="fa fa-check"></i><b>2.2.3</b> Memory Segmentation</a></li>
+<li class="chapter" data-level="2.2.4" data-path="myOS.html"><a href="myOS.html#bootloader-and-kernel"><i class="fa fa-check"></i><b>2.2.4</b> Bootloader and Kernel</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="myOS.html"><a href="myOS.html#assembly"><i class="fa fa-check"></i><b>2.2</b> Assembly</a></li>
+<li class="chapter" data-level="2.3" data-path="myOS.html"><a href="myOS.html#writing-the-code"><i class="fa fa-check"></i><b>2.3</b> Writing the code</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="myOS.html"><a href="myOS.html#directives-used"><i class="fa fa-check"></i><b>2.3.1</b> Directives Used</a></li>
+<li class="chapter" data-level="2.3.2" data-path="myOS.html"><a href="myOS.html#writing-assembly-code"><i class="fa fa-check"></i><b>2.3.2</b> Writing Assembly Code</a></li>
+<li class="chapter" data-level="2.3.3" data-path="myOS.html"><a href="myOS.html#hello-world-1"><i class="fa fa-check"></i><b>2.3.3</b> Hello, World!</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="_blank">Published with bookdown</a></li>
@@ -123,11 +128,23 @@
             <section class="normal" id="section-">
 <div id="myOS" class="section level1 hasAnchor" number="2">
 <h1><span class="header-section-number">Chapter 2</span> Operating Systems<a href="myOS.html#myOS" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>myOS project description</p>
-<div id="background-information" class="section level2 hasAnchor" number="2.1">
-<h2><span class="header-section-number">2.1</span> Background Information<a href="myOS.html#background-information" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="how-a-computer-starts-up" class="section level3 hasAnchor" number="2.1.1">
-<h3><span class="header-section-number">2.1.1</span> How a computer starts up<a href="myOS.html#how-a-computer-starts-up" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>myOS is a project which aims to build a small operating system, with the purpose of gaining a deeper understanding of how computers work. This article follows <a href="https://www.youtube.com/playlist?list=PLFjM7v6KGMpiH2G-kT781ByCNC_0pKpPN">nanobyte’s video series</a>.</p>
+<p>The operating system is to be written for the Intel (x86) architecture.</p>
+<div id="tools" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Tools<a href="myOS.html#tools" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We will need a couple of tools to put together our operating system:</p>
+<ul>
+<li>A text editor</li>
+<li>An assembler (we will use NASM)</li>
+<li>GNU Make</li>
+<li>qemu (or any other virtualisation software, e.g. VirtualBox)</li>
+</ul>
+<p>We will use a Linux system to do our development. For Windows, the best option may be to use WSL (Windows Subsystem for Linux).</p>
+</div>
+<div id="background-information" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Background Information<a href="myOS.html#background-information" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="how-a-computer-starts-up" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> How a computer starts up<a href="myOS.html#how-a-computer-starts-up" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The sequence is as follows:</p>
 <ul>
 <li>BIOS is copied from a ROM chip into RAM</li>
@@ -141,38 +158,23 @@
 <li>OS runs</li>
 </ul>
 </div>
-<div id="how-the-bios-finds-an-os-2-ways" class="section level3 hasAnchor" number="2.1.2">
-<h3><span class="header-section-number">2.1.2</span> How the BIOS finds an OS (2 ways):<a href="myOS.html#how-the-bios-finds-an-os-2-ways" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="how-the-bios-finds-an-os-2-ways" class="section level3 hasAnchor" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> How the BIOS finds an OS (2 ways):<a href="myOS.html#how-the-bios-finds-an-os-2-ways" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>LEGACY BOOTING</p>
 <ul>
-<li>BIOS loads first sector of each bootable device
-into memory (at location <code>0x7c00</code>)</li>
-<li>BIOS checks for <code>0xaa55</code> signature
-(last two bytes of the first sector)</li>
+<li>BIOS loads first sector of each bootable device into memory (at location <code>0x7c00</code>)</li>
+<li>BIOS checks for <code>0xaa55</code> signature (last two bytes of the first sector)</li>
 <li>If found, it starts executing code</li>
 </ul>
 <p>EFI</p>
 <ul>
-<li>BIOS looks for a special EFI partition
-which contains some special EFI programs</li>
-<li>OS must be compiled as an EFI programs</li>
+<li>BIOS looks for a special EFI partition which contains some special EFI programs</li>
+<li>OS must be compiled as an EFI program</li>
 </ul>
 <p>We will use legacy booting for this OS.</p>
 </div>
-<div id="directives-used" class="section level3 hasAnchor" number="2.1.3">
-<h3><span class="header-section-number">2.1.3</span> Directives Used<a href="myOS.html#directives-used" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><code>ORG</code> directive:
-Tell the assembler where we expect our code to be loaded.
-Assembler uses this information to calculate label addresses.</p>
-<p><code>BITS</code> directive:
-Tell the assembler to emit 16/32/64-bit code.</p>
-<p><code>TIMES [number] [instruction/data]</code> directive:
-Repeats given instruction/data a number of times.</p>
-<p><code>$</code>: Memory offset of the current line.</p>
-<p><code>$$</code>: Memory offset of the beginning of the current section.</p>
-</div>
-<div id="memory-segmentation" class="section level3 hasAnchor" number="2.1.4">
-<h3><span class="header-section-number">2.1.4</span> Memory Segmentation<a href="myOS.html#memory-segmentation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="memory-segmentation" class="section level3 hasAnchor" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> Memory Segmentation<a href="myOS.html#memory-segmentation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The segment and offset addressing scheme for memory can be used. It has the form <code>segment:offset</code>. For example, a memory address could be represented as <code>0x1234:0x5678</code> where <code>0x1234</code> is the segment and <code>0x5678</code> is the offset.</p>
 <p>In this scheme we address memory using two 16-bit values, the segment and the offset.</p>
 <p>Each segment contains 64kb of memory, where each byte can be accessed using the offset value. Segments overlap every 16 bytes.</p>
@@ -203,32 +205,49 @@ displacement:   a (signed) constant value</code></pre>
 <li>Constants cannot be directly written to the segment registers. An intermediary register has to be used.</li>
 </ul>
 <p>Most operating systems will switch to 32- or 64-bit mode
-immediately after startup.</p>
+immediately after startup.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 </div>
-<div id="bootloader-and-kernel" class="section level3 hasAnchor" number="2.1.5">
-<h3><span class="header-section-number">2.1.5</span> Bootloader and Kernel<a href="myOS.html#bootloader-and-kernel" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Bootloader:</p>
+<div id="bootloader-and-kernel" class="section level3 hasAnchor" number="2.2.4">
+<h3><span class="header-section-number">2.2.4</span> Bootloader and Kernel<a href="myOS.html#bootloader-and-kernel" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The bootloader has some basic functions:</p>
 <ul>
 <li>loads basic components into memory</li>
-<li>puts system in expected state</li>
-<li>collects information about system</li>
+<li>put system in expected state</li>
+<li>collect information about system</li>
+<li>load the kernel.</li>
 </ul>
-<p>The bootloader will load the kernel.</p>
 <p>We will write the bootloader in the first sector of the disk,
 and the rest of the operating system (the kernel) will start
 from the second sector onwards.</p>
 </div>
 </div>
-<div id="assembly" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> Assembly<a href="myOS.html#assembly" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="writing-the-code" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Writing the code<a href="myOS.html#writing-the-code" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Now we can begin writing the code for our small operating system. At this stage, we have not much choice but to write our code in assembly language.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
+<div id="directives-used" class="section level3 hasAnchor" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Directives Used<a href="myOS.html#directives-used" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>These are some of the directives used:</p>
+<p><code>ORG</code> directive:
+Tell the assembler where we expect our code to be loaded.
+Assembler uses this information to calculate label addresses.</p>
+<p><code>BITS</code> directive:
+Tell the assembler to emit 16/32/64-bit code.</p>
+<p><code>TIMES [number] [instruction/data]</code> directive:
+Repeats given instruction/data a number of times.</p>
+<p><code>$</code>: Memory offset of the current line.</p>
+<p><code>$$</code>: Memory offset of the beginning of the current section.</p>
+</div>
+<div id="writing-assembly-code" class="section level3 hasAnchor" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> Writing Assembly Code<a href="myOS.html#writing-assembly-code" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We can now start to write assembly code in a file <code>main.asm</code>. We begin by writing some directives. A directive is a hint given to the assembler about how to process our code. It is not translated into any machine instructions.</p>
+<p>For now, our tiny “operating system” will only print the string “Hello, World!”. After this, we prevent code from being executed further.</p>
+<p>As the CPU always starts in 16-bit mode, we use the <code>bits</code> directive to tell the assembler to emit 16-bit code.</p>
 <pre><code>org 0x7c00
-
-; We need to emit 16-bit code because the CPU always starts in 16-bit mode.
-bits 16
-
-%define ENDL 0x0d, 0x0a
-
-start:
+bits 16</code></pre>
+<p>The end-of-line sequence consists of both the carriage return (<code>\r</code>) and line feed (<code>\n</code>). We define a symbol <code>ENDL</code> for convenience.</p>
+<pre><code>%define ENDL 0x0d, 0x0a</code></pre>
+<p>To print our string, we will implement a <code>puts</code> subroutine, similar to the <code>puts()</code> function from the C standard library.</p>
+<pre><code>start:
     jmp main
 
 
@@ -243,58 +262,78 @@ puts:
     push ax
 
 .loop:
-    lodsb       ; loads next char into al
-    or al, al   ; verify is next char is null
-    jz .done
+    lodsb             ; loads next char into al
+    or al, al       ; check if the next char is null
+    jz .done      ; jump if null
 
-    mov ah, 0x0e    ; Print Character in TTY Mode
-    mov bh, 0   ; Page Number
-    int 0x10    ; BIOS Interrupt: Video
+    mov ah, 0x0e  ; Print Character in TTY Mode
+    mov bh, 0     ; Page Number
+    int 0x10      ; BIOS Interrupt: Video
     jmp .loop
 .done:
     pop ax
     pop si
-    ret
-
-
-
-main:
+    ret</code></pre>
+<p>After <code>puts</code> returns, the stack should be in the same state as before <code>puts</code> was called. This is why we save the values of <code>ax</code> and <code>si</code> before modifying them, and pop from the stack back into these registers at the end.</p>
+<p>Now we write the code for <code>main</code> that we jump to from the <code>start</code> label.
+We set up the data and stack segments, and call <code>puts</code>.</p>
+<pre><code>main:
     ; setup data segments
-    mov ax, 0   ; can&#39;t write to ds/es directly
+    mov ax, 0           ; can&#39;t write to ds/es directly
     mov ds, ax
     mov es, ax
 
     ; setup stack
     mov ss, ax
-    mov sp, 0x7c00  ; stack grows downwards from beginning of program
+    mov sp, 0x7c00    ; stack grows downwards from beginning of program
 
     ; print message
     mov si, msg_hello
     call puts
 
-    hlt
+    hlt               ; halt instruction
 
 .freeze:
-    jmp .freeze
-
-
-
-msg_hello: db &quot;Hello, World!&quot;, ENDL, 0
-
-
-; $-$$: Length of the program so far in bytes.
-
-; The BIOS expects the last two bytes of the first sector are 0xaa55.
-; On a standard 1.44Mb floppy disk, each sector is 512b large.
-; We pad the program up to 510 bytes and then declare the 2 bytes signature.
-
-times 510 - ($-$$) db 0
-dw 0AA55h
-
-
-</code></pre>
+    jmp .freeze</code></pre>
+<p>The <code>msg_hello</code> label is defined as such:</p>
+<pre><code>msg_hello: db &quot;Hello, World!&quot;, ENDL, 0</code></pre>
+<p>Now, we pad the program up to 512 bytes, including the special signature<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> that the BIOS will look for.</p>
+<p>Here, <code>$-$$</code> calculates the length of the program so far in bytes.</p>
+<pre><code>times 510 - ($-$$) db 0   ; pad up to 510 bytes
+dw 0AA55h                 ; define the two-byte signature</code></pre>
+</div>
+<div id="hello-world-1" class="section level3 hasAnchor" number="2.3.3">
+<h3><span class="header-section-number">2.3.3</span> Hello, World!<a href="myOS.html#hello-world-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We can finally test our little operating system!
+Assemble the code and pad it up to the length of a floppy disk (1440kb):</p>
+<pre><code>$ nasm main.asm -f bin -o build/main.bin
+$ cp build/main.bin build/main_floppy.img
+$ truncate -s 1440k build/main_floppy.img</code></pre>
+<p>You can use GNU make to run the above commands for you.</p>
+<p>Testing our floppy disk in a virtual machine, we get the string printed out on the screen. I used VirtualBox for this demo.</p>
+<div class="float">
+<img src="assets/hello_world_myos.png" alt="“Hello, World!” is printed successfully" />
+<div class="figcaption">“Hello, World!” is printed successfully</div>
+</div>
 
 </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>In order to preserve backwards compatibility with older programs made for 16-bit Intel CPUs, we start off in 16-bit mode. Afterwards, the switch is made from 16-bit mode to 32-bit or 64-bit mode.<a href="myOS.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>Writing in assembly is time-consuming. We can later switch to a higher-level language, such as C.<a href="myOS.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>The BIOS expects the last two bytes of the first sector to be <code>0xaa55</code>. On a standard 1.44Mb floppy disk, each sector is 512 bytes large. Thus, we pad the program up to 510 bytes and then declare the 2 bytes signature.<a href="myOS.html#fnref3" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
             </section>
 
