@@ -46,3 +46,12 @@ ignoring-memory-management
 an-important-note-about-ownership
 not-everything-needs-to-be-a-class
 pass-by-value-vs.-pass-by-reference
+removing-outliers-for-machine-learning
+what-are-outliers
+why-should-we-remove-outliers
+deciding-which-values-are-outliers
+cutoff-value
+interquartile-range-iqr
+z-score
+example
+conclusion

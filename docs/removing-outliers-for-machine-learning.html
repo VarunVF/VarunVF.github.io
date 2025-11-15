@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 Removing Outliers for Machine Learning | VarunVF’s Projects</title>
+  <meta name="description" content="Chapter 5 Removing Outliers for Machine Learning | VarunVF’s Projects" />
+  <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 Removing Outliers for Machine Learning | VarunVF’s Projects" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Removing Outliers for Machine Learning | VarunVF’s Projects" />
+  
+  
+  
+
+<meta name="author" content="VarunVF" />
+
+
+<meta name="date" content="2025-11-15" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="bridging-java-to-c-idiomatic-differences-and-best-practices.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><strong><a href="./">VarunVF's Projects</a></strong></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Hello World</a></li>
+<li class="chapter" data-level="1" data-path="jlox.html"><a href="jlox.html"><i class="fa fa-check"></i><b>1</b> jlox</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="jlox.html"><a href="jlox.html#motivation"><i class="fa fa-check"></i><b>1.1</b> Motivation</a></li>
+<li class="chapter" data-level="1.2" data-path="jlox.html"><a href="jlox.html#language-features"><i class="fa fa-check"></i><b>1.2</b> Language Features</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="jlox.html"><a href="jlox.html#data-types"><i class="fa fa-check"></i><b>1.2.1</b> Data Types</a></li>
+<li class="chapter" data-level="1.2.2" data-path="jlox.html"><a href="jlox.html#expressions"><i class="fa fa-check"></i><b>1.2.2</b> Expressions</a></li>
+<li class="chapter" data-level="1.2.3" data-path="jlox.html"><a href="jlox.html#control-flow"><i class="fa fa-check"></i><b>1.2.3</b> Control Flow</a></li>
+<li class="chapter" data-level="1.2.4" data-path="jlox.html"><a href="jlox.html#functions"><i class="fa fa-check"></i><b>1.2.4</b> Functions</a></li>
+<li class="chapter" data-level="1.2.5" data-path="jlox.html"><a href="jlox.html#classes"><i class="fa fa-check"></i><b>1.2.5</b> Classes</a></li>
+<li class="chapter" data-level="1.2.6" data-path="jlox.html"><a href="jlox.html#comments"><i class="fa fa-check"></i><b>1.2.6</b> Comments</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="myOS.html"><a href="myOS.html"><i class="fa fa-check"></i><b>2</b> Operating Systems</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="myOS.html"><a href="myOS.html#tools"><i class="fa fa-check"></i><b>2.1</b> Tools</a></li>
+<li class="chapter" data-level="2.2" data-path="myOS.html"><a href="myOS.html#background-information"><i class="fa fa-check"></i><b>2.2</b> Background Information</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="myOS.html"><a href="myOS.html#how-a-computer-starts-up"><i class="fa fa-check"></i><b>2.2.1</b> How a computer starts up</a></li>
+<li class="chapter" data-level="2.2.2" data-path="myOS.html"><a href="myOS.html#how-the-bios-finds-an-os-2-ways"><i class="fa fa-check"></i><b>2.2.2</b> How the BIOS finds an OS (2 ways):</a></li>
+<li class="chapter" data-level="2.2.3" data-path="myOS.html"><a href="myOS.html#memory-segmentation"><i class="fa fa-check"></i><b>2.2.3</b> Memory Segmentation</a></li>
+<li class="chapter" data-level="2.2.4" data-path="myOS.html"><a href="myOS.html#bootloader-and-kernel"><i class="fa fa-check"></i><b>2.2.4</b> Bootloader and Kernel</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="myOS.html"><a href="myOS.html#writing-the-code"><i class="fa fa-check"></i><b>2.3</b> Writing the code</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="myOS.html"><a href="myOS.html#directives-used"><i class="fa fa-check"></i><b>2.3.1</b> Directives Used</a></li>
+<li class="chapter" data-level="2.3.2" data-path="myOS.html"><a href="myOS.html#writing-assembly-code"><i class="fa fa-check"></i><b>2.3.2</b> Writing Assembly Code</a></li>
+<li class="chapter" data-level="2.3.3" data-path="myOS.html"><a href="myOS.html#hello-world-1"><i class="fa fa-check"></i><b>2.3.3</b> Hello, World!</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html"><i class="fa fa-check"></i><b>3</b> My Experience Learning to Write Shaders</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#the-spark"><i class="fa fa-check"></i><b>3.1</b> The Spark</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#thinking-in-parallel-with-glsl"><i class="fa fa-check"></i><b>3.1.1</b> Thinking in Parallel with GLSL</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#coordinate-spaces"><i class="fa fa-check"></i><b>3.2</b> Coordinate Spaces</a></li>
+<li class="chapter" data-level="3.3" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#deferred-shading"><i class="fa fa-check"></i><b>3.3</b> Deferred Shading</a></li>
+<li class="chapter" data-level="3.4" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#visual-debugging-numbers-are-colors"><i class="fa fa-check"></i><b>3.4</b> ‘Visual Debugging’: Numbers Are Colors</a></li>
+<li class="chapter" data-level="3.5" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#accidentally-breaking-some-entities"><i class="fa fa-check"></i><b>3.5</b> Accidentally Breaking Some Entities</a></li>
+<li class="chapter" data-level="3.6" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#the-shadow-acne-problem"><i class="fa fa-check"></i><b>3.6</b> The Shadow Acne Problem</a></li>
+<li class="chapter" data-level="3.7" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#flexibility"><i class="fa fa-check"></i><b>3.7</b> Flexibility</a>
+<ul>
+<li class="chapter" data-level="3.7.1" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#flexibility-for-users"><i class="fa fa-check"></i><b>3.7.1</b> Flexibility for Users</a></li>
+<li class="chapter" data-level="3.7.2" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#flexibility-for-multiple-platforms"><i class="fa fa-check"></i><b>3.7.2</b> Flexibility for Multiple Platforms</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#my-current-progress"><i class="fa fa-check"></i><b>3.8</b> My Current Progress</a></li>
+<li class="chapter" data-level="3.9" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#resources"><i class="fa fa-check"></i><b>3.9</b> Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="bridging-java-to-c-idiomatic-differences-and-best-practices.html"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html"><i class="fa fa-check"></i><b>4</b> Bridging Java to C++: Idiomatic Differences and Best Practices</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="bridging-java-to-c-idiomatic-differences-and-best-practices.html"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#dynamically-allocating-everything"><i class="fa fa-check"></i><b>4.1</b> Dynamically Allocating Everything</a></li>
+<li class="chapter" data-level="4.2" data-path="bridging-java-to-c-idiomatic-differences-and-best-practices.html"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#ignoring-memory-management"><i class="fa fa-check"></i><b>4.2</b> Ignoring Memory Management</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="bridging-java-to-c-idiomatic-differences-and-best-practices.html"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#an-important-note-about-ownership"><i class="fa fa-check"></i><b>4.2.1</b> An important note about ownership</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="bridging-java-to-c-idiomatic-differences-and-best-practices.html"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#not-everything-needs-to-be-a-class"><i class="fa fa-check"></i><b>4.3</b> Not Everything Needs to be a Class</a></li>
+<li class="chapter" data-level="4.4" data-path="bridging-java-to-c-idiomatic-differences-and-best-practices.html"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#pass-by-value-vs.-pass-by-reference"><i class="fa fa-check"></i><b>4.4</b> Pass-by-value vs. Pass-by-reference</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="removing-outliers-for-machine-learning.html"><a href="removing-outliers-for-machine-learning.html"><i class="fa fa-check"></i><b>5</b> Removing Outliers for Machine Learning</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="removing-outliers-for-machine-learning.html"><a href="removing-outliers-for-machine-learning.html#what-are-outliers"><i class="fa fa-check"></i><b>5.1</b> What are outliers?</a></li>
+<li class="chapter" data-level="5.2" data-path="removing-outliers-for-machine-learning.html"><a href="removing-outliers-for-machine-learning.html#why-should-we-remove-outliers"><i class="fa fa-check"></i><b>5.2</b> Why should we remove outliers?</a></li>
+<li class="chapter" data-level="5.3" data-path="removing-outliers-for-machine-learning.html"><a href="removing-outliers-for-machine-learning.html#deciding-which-values-are-outliers"><i class="fa fa-check"></i><b>5.3</b> Deciding which values are outliers</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="removing-outliers-for-machine-learning.html"><a href="removing-outliers-for-machine-learning.html#cutoff-value"><i class="fa fa-check"></i><b>5.3.1</b> Cutoff value</a></li>
+<li class="chapter" data-level="5.3.2" data-path="removing-outliers-for-machine-learning.html"><a href="removing-outliers-for-machine-learning.html#interquartile-range-iqr"><i class="fa fa-check"></i><b>5.3.2</b> Interquartile Range (IQR)</a></li>
+<li class="chapter" data-level="5.3.3" data-path="removing-outliers-for-machine-learning.html"><a href="removing-outliers-for-machine-learning.html#z-score"><i class="fa fa-check"></i><b>5.3.3</b> Z-Score</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="removing-outliers-for-machine-learning.html"><a href="removing-outliers-for-machine-learning.html#example"><i class="fa fa-check"></i><b>5.4</b> Example</a></li>
+<li class="chapter" data-level="5.5" data-path="removing-outliers-for-machine-learning.html"><a href="removing-outliers-for-machine-learning.html#conclusion"><i class="fa fa-check"></i><b>5.5</b> Conclusion</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="_blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">VarunVF’s Projects</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="removing-outliers-for-machine-learning" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Removing Outliers for Machine Learning<a href="removing-outliers-for-machine-learning.html#removing-outliers-for-machine-learning" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><img src="assets/removing-outliers/thumbnail.png" /></p>
+<p>In this article, we will explain what outliers are and go over some outlier removal procedures, in the context of machine learning.</p>
+<hr />
+<div id="what-are-outliers" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> What are outliers?<a href="removing-outliers-for-machine-learning.html#what-are-outliers" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In statistics or machine learning, outliers in a dataset refer to data points that deviate significantly from the trend presented by the rest of the data points. When most of the other data points seem to fall in a similar general range or exhibit a similar pattern, outliers differ from this general trend.</p>
+<p>Depending on the cause of the outliers and their prevalence in a dataset, it may be desirable to remove these extreme values before doing any further processing.</p>
+<hr />
+</div>
+<div id="why-should-we-remove-outliers" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Why should we remove outliers?<a href="removing-outliers-for-machine-learning.html#why-should-we-remove-outliers" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Removing outliers can be beneficial in many cases. If the chosen model is more sensitive to data distribution, then cleaning the data first would likely improve the model’s accuracy. The k-nearest neighbors (KNN) algorithm will be more sensitive to outliers, for example, because it depends on the distance to the closest neighbors. Additionally, if the outliers are already known to be errors, or domain knowledge says the extreme values are practically impossible, their removal may be justified.</p>
+<p>However, it is also important to consider whether the suspected outlier values are really erroneous in nature, and are safe to remove. Disproportionately sized values might indicate rare but important trends that, when removed from the dataset, cannot be picked up by the model. There is also a need for a clear and consistent definition of an outlier: there are several such standards which are applied in different cases.</p>
+<hr />
+</div>
+<div id="deciding-which-values-are-outliers" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Deciding which values are outliers<a href="removing-outliers-for-machine-learning.html#deciding-which-values-are-outliers" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We need to choose our definition of an outlier, and our method of outlier removal will mostly then be based on the standard we choose. As mentioned, there are several different ways of defining and identifying outliers. We will be working with the <a href="https://pandas.pydata.org/">pandas</a> library in Python to go over a few of these methods below.</p>
+<div id="cutoff-value" class="section level3 hasAnchor" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> Cutoff value<a href="removing-outliers-for-machine-learning.html#cutoff-value" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This is probably the simplest form of outlier removal, where all observations that are more extreme than a certain cutoff value will be considered outliers.</p>
+<p>I will make use of the index operator[] for these functions as the syntax is concise. It operates on a DataFrame and selects certain rows from it. You can write a condition within the square brackets, which will determine the data that should be present in the selection. This is called <a href="https://pandas.pydata.org/docs/user_guide/indexing.html#boolean-indexing">boolean indexing</a>.</p>
+<p>For instance, a statement like table[table[col] &gt; 0.5] means: “Select all the records in column”col” in the DataFrame “table”, where the value is more than 0.5”.</p>
+<p>Here we only select all the records that are larger than min_val and smaller than max_val, discarding the rest.</p>
+<p>Possible implementation:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="removing-outliers-for-machine-learning.html#cb43-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb43-2"><a href="removing-outliers-for-machine-learning.html#cb43-2" tabindex="-1"></a></span>
+<span id="cb43-3"><a href="removing-outliers-for-machine-learning.html#cb43-3" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="removing-outliers-for-machine-learning.html#cb43-4" tabindex="-1"></a><span class="kw">def</span> remove_cutoff(data: pd.DataFrame,</span>
+<span id="cb43-5"><a href="removing-outliers-for-machine-learning.html#cb43-5" tabindex="-1"></a>                  columns_to_clean: <span class="bu">list</span>,</span>
+<span id="cb43-6"><a href="removing-outliers-for-machine-learning.html#cb43-6" tabindex="-1"></a>                  min_val: <span class="bu">float</span>,</span>
+<span id="cb43-7"><a href="removing-outliers-for-machine-learning.html#cb43-7" tabindex="-1"></a>                  max_val: <span class="bu">float</span>) <span class="op">-&gt;</span> pd.DataFrame:</span>
+<span id="cb43-8"><a href="removing-outliers-for-machine-learning.html#cb43-8" tabindex="-1"></a>    result <span class="op">=</span> data.copy()</span>
+<span id="cb43-9"><a href="removing-outliers-for-machine-learning.html#cb43-9" tabindex="-1"></a>    <span class="cf">for</span> col <span class="kw">in</span> result.columns:</span>
+<span id="cb43-10"><a href="removing-outliers-for-machine-learning.html#cb43-10" tabindex="-1"></a>        <span class="cf">if</span> col <span class="kw">in</span> columns_to_clean:</span>
+<span id="cb43-11"><a href="removing-outliers-for-machine-learning.html#cb43-11" tabindex="-1"></a>            result <span class="op">=</span> result[result[col] <span class="op">&gt;=</span> min_val]</span>
+<span id="cb43-12"><a href="removing-outliers-for-machine-learning.html#cb43-12" tabindex="-1"></a>            result <span class="op">=</span> result[result[col] <span class="op">&lt;=</span> max_val]</span>
+<span id="cb43-13"><a href="removing-outliers-for-machine-learning.html#cb43-13" tabindex="-1"></a>    <span class="cf">return</span> result</span></code></pre></div>
+<hr />
+</div>
+<div id="interquartile-range-iqr" class="section level3 hasAnchor" number="5.3.2">
+<h3><span class="header-section-number">5.3.2</span> Interquartile Range (IQR)<a href="removing-outliers-for-machine-learning.html#interquartile-range-iqr" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This method is related to box-and-whisker plots from statistics. The IQR is a measure of the spread of most of the data: larger IQR generally means the data points are distributed across a wider range.</p>
+<p>The IQR statistic is related to the median. The median value is found by sorting the data points in increasing order, then selecting the data point in the middle position (or at the 50% mark of all the data). Similarly, the first quartile (Q1) and third quartile (Q3) are found from the 25% mark and 75% mark respectively. To be clear, the first quartile being at 25% means that it is the value <strong>below which 25% of the data fall</strong>.</p>
+<p>Building upon the simple function we wrote above, we just have to calculate our upper and lower bounds, then use the same index operators to clean the data. I made use of the quantile method, which finds the data value at 25% (first quartile) and 75% (third quartile).</p>
+<p>I also gave the threshold parameter a default value of 1.5. This is a typical value used for the endpoints of whiskers in a box-and-whisker plot (1.5 times the IQR).</p>
+<p>Possible implementation:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="removing-outliers-for-machine-learning.html#cb44-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb44-2"><a href="removing-outliers-for-machine-learning.html#cb44-2" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="removing-outliers-for-machine-learning.html#cb44-3" tabindex="-1"></a></span>
+<span id="cb44-4"><a href="removing-outliers-for-machine-learning.html#cb44-4" tabindex="-1"></a><span class="kw">def</span> remove_iqr(data: pd.DataFrame,</span>
+<span id="cb44-5"><a href="removing-outliers-for-machine-learning.html#cb44-5" tabindex="-1"></a>               columns_to_clean: <span class="bu">list</span>,</span>
+<span id="cb44-6"><a href="removing-outliers-for-machine-learning.html#cb44-6" tabindex="-1"></a>               threshold: <span class="bu">float</span> <span class="op">=</span> <span class="fl">1.5</span>) <span class="op">-&gt;</span> pd.DataFrame:</span>
+<span id="cb44-7"><a href="removing-outliers-for-machine-learning.html#cb44-7" tabindex="-1"></a>    result <span class="op">=</span> data.copy()</span>
+<span id="cb44-8"><a href="removing-outliers-for-machine-learning.html#cb44-8" tabindex="-1"></a>    <span class="cf">for</span> col <span class="kw">in</span> result:</span>
+<span id="cb44-9"><a href="removing-outliers-for-machine-learning.html#cb44-9" tabindex="-1"></a>        <span class="cf">if</span> col <span class="kw">in</span> columns_to_clean:</span>
+<span id="cb44-10"><a href="removing-outliers-for-machine-learning.html#cb44-10" tabindex="-1"></a>            Q1 <span class="op">=</span> result[col].quantile(<span class="fl">0.25</span>)</span>
+<span id="cb44-11"><a href="removing-outliers-for-machine-learning.html#cb44-11" tabindex="-1"></a>            Q3 <span class="op">=</span> result[col].quantile(<span class="fl">0.75</span>)</span>
+<span id="cb44-12"><a href="removing-outliers-for-machine-learning.html#cb44-12" tabindex="-1"></a>            <span class="co"># Inter-quartile range (middle 50% range)</span></span>
+<span id="cb44-13"><a href="removing-outliers-for-machine-learning.html#cb44-13" tabindex="-1"></a>            IQR <span class="op">=</span> Q3 <span class="op">-</span> Q1</span>
+<span id="cb44-14"><a href="removing-outliers-for-machine-learning.html#cb44-14" tabindex="-1"></a>            min_val <span class="op">=</span> Q1 <span class="op">-</span> threshold <span class="op">*</span> IQR</span>
+<span id="cb44-15"><a href="removing-outliers-for-machine-learning.html#cb44-15" tabindex="-1"></a>            max_val <span class="op">=</span> Q3 <span class="op">+</span> threshold <span class="op">*</span> IQR</span>
+<span id="cb44-16"><a href="removing-outliers-for-machine-learning.html#cb44-16" tabindex="-1"></a>            result <span class="op">=</span> result[result[col] <span class="op">&gt;=</span> min_val]</span>
+<span id="cb44-17"><a href="removing-outliers-for-machine-learning.html#cb44-17" tabindex="-1"></a>            result <span class="op">=</span> result[result[col] <span class="op">&lt;=</span> max_val]</span>
+<span id="cb44-18"><a href="removing-outliers-for-machine-learning.html#cb44-18" tabindex="-1"></a>    <span class="cf">return</span> result</span></code></pre></div>
+<hr />
+</div>
+<div id="z-score" class="section level3 hasAnchor" number="5.3.3">
+<h3><span class="header-section-number">5.3.3</span> Z-Score<a href="removing-outliers-for-machine-learning.html#z-score" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The Z-Score, or standard score, refers to the number of standard deviations away from the mean that a data point lies at. In turn, standard deviation is a measure of the amount of variation a variable has about its mean.</p>
+<p>Removing outliers based on Z-Score is a more consistent approach than the one described in the “cutoff method”. That cutoff method depends on choosing a rather subjective cutoff value, which could be different for each feature. However, the Z-Score method does rely on the assumption that the features are normally distributed. Not all data can be considered normal or approximately normal, especially if the sample size is not large (see Central Limit Theorem).</p>
+<p>Possible implementation:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="removing-outliers-for-machine-learning.html#cb45-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb45-2"><a href="removing-outliers-for-machine-learning.html#cb45-2" tabindex="-1"></a></span>
+<span id="cb45-3"><a href="removing-outliers-for-machine-learning.html#cb45-3" tabindex="-1"></a></span>
+<span id="cb45-4"><a href="removing-outliers-for-machine-learning.html#cb45-4" tabindex="-1"></a><span class="kw">def</span> remove_z_score(data: pd.DataFrame,</span>
+<span id="cb45-5"><a href="removing-outliers-for-machine-learning.html#cb45-5" tabindex="-1"></a>                   columns_to_clean: <span class="bu">list</span>,</span>
+<span id="cb45-6"><a href="removing-outliers-for-machine-learning.html#cb45-6" tabindex="-1"></a>                   n: <span class="bu">float</span> <span class="op">=</span> <span class="dv">3</span>) <span class="op">-&gt;</span> pd.DataFrame:</span>
+<span id="cb45-7"><a href="removing-outliers-for-machine-learning.html#cb45-7" tabindex="-1"></a>    result <span class="op">=</span> data.copy()</span>
+<span id="cb45-8"><a href="removing-outliers-for-machine-learning.html#cb45-8" tabindex="-1"></a>    <span class="cf">for</span> col <span class="kw">in</span> result:</span>
+<span id="cb45-9"><a href="removing-outliers-for-machine-learning.html#cb45-9" tabindex="-1"></a>        <span class="cf">if</span> col <span class="kw">in</span> columns_to_clean:</span>
+<span id="cb45-10"><a href="removing-outliers-for-machine-learning.html#cb45-10" tabindex="-1"></a>            std <span class="op">=</span> result[col].std()</span>
+<span id="cb45-11"><a href="removing-outliers-for-machine-learning.html#cb45-11" tabindex="-1"></a>            mean <span class="op">=</span> result[col].mean()</span>
+<span id="cb45-12"><a href="removing-outliers-for-machine-learning.html#cb45-12" tabindex="-1"></a>            <span class="co"># Standardise the normal distribution</span></span>
+<span id="cb45-13"><a href="removing-outliers-for-machine-learning.html#cb45-13" tabindex="-1"></a>            min_val <span class="op">=</span> <span class="op">-</span>n <span class="op">*</span> std <span class="op">+</span> mean</span>
+<span id="cb45-14"><a href="removing-outliers-for-machine-learning.html#cb45-14" tabindex="-1"></a>            max_val <span class="op">=</span> <span class="op">+</span>n <span class="op">*</span> std <span class="op">+</span> mean</span>
+<span id="cb45-15"><a href="removing-outliers-for-machine-learning.html#cb45-15" tabindex="-1"></a>            result <span class="op">=</span> result[result[col] <span class="op">&gt;=</span> min_val]</span>
+<span id="cb45-16"><a href="removing-outliers-for-machine-learning.html#cb45-16" tabindex="-1"></a>            result <span class="op">=</span> result[result[col] <span class="op">&lt;=</span> max_val]</span>
+<span id="cb45-17"><a href="removing-outliers-for-machine-learning.html#cb45-17" tabindex="-1"></a>    <span class="cf">return</span> result</span></code></pre></div>
+<hr />
+</div>
+</div>
+<div id="example" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> Example<a href="removing-outliers-for-machine-learning.html#example" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To illustrate the removal of outliers, let’s generate some normally distributed random numbers and look at the result after cleaning:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="removing-outliers-for-machine-learning.html#cb46-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb46-2"><a href="removing-outliers-for-machine-learning.html#cb46-2" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb46-3"><a href="removing-outliers-for-machine-learning.html#cb46-3" tabindex="-1"></a></span>
+<span id="cb46-4"><a href="removing-outliers-for-machine-learning.html#cb46-4" tabindex="-1"></a>original_data <span class="op">=</span> np.random.standard_normal(size<span class="op">=</span><span class="dv">2000</span>)</span>
+<span id="cb46-5"><a href="removing-outliers-for-machine-learning.html#cb46-5" tabindex="-1"></a>original_data <span class="op">=</span> pd.DataFrame(original_data)</span></code></pre></div>
+<p>Remove the data points that lie beyond 2 standard deviations away from the mean:</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="removing-outliers-for-machine-learning.html#cb47-1" tabindex="-1"></a>cleaned_data <span class="op">=</span> remove_z_score(original_data, original_data.columns, <span class="dv">2</span>)</span></code></pre></div>
+<p>We can visually compare the distribution of the original and cleaned datasets using <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.boxplot.html">matplotlib boxplots</a>:</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="removing-outliers-for-machine-learning.html#cb48-1" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb48-2"><a href="removing-outliers-for-machine-learning.html#cb48-2" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="removing-outliers-for-machine-learning.html#cb48-3" tabindex="-1"></a></span>
+<span id="cb48-4"><a href="removing-outliers-for-machine-learning.html#cb48-4" tabindex="-1"></a>fig, (ax1, ax2) <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb48-5"><a href="removing-outliers-for-machine-learning.html#cb48-5" tabindex="-1"></a></span>
+<span id="cb48-6"><a href="removing-outliers-for-machine-learning.html#cb48-6" tabindex="-1"></a>ax1.set_title(<span class="st">&#39;Original Data&#39;</span>)</span>
+<span id="cb48-7"><a href="removing-outliers-for-machine-learning.html#cb48-7" tabindex="-1"></a>ax1.boxplot(original_data)</span>
+<span id="cb48-8"><a href="removing-outliers-for-machine-learning.html#cb48-8" tabindex="-1"></a></span>
+<span id="cb48-9"><a href="removing-outliers-for-machine-learning.html#cb48-9" tabindex="-1"></a>ax2.set_title(<span class="st">&#39;Cleaned Data&#39;</span>)</span>
+<span id="cb48-10"><a href="removing-outliers-for-machine-learning.html#cb48-10" tabindex="-1"></a>ax2.boxplot(cleaned_data)</span>
+<span id="cb48-11"><a href="removing-outliers-for-machine-learning.html#cb48-11" tabindex="-1"></a></span>
+<span id="cb48-12"><a href="removing-outliers-for-machine-learning.html#cb48-12" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p>Below is a possible graph that could be obtained. The outliers, marked by matplotlib as black circles beyond the whiskers, have been filtered out in the cleaned dataset.</p>
+<p><img src="assets/removing-outliers/boxplot.png" /></p>
+<hr />
+</div>
+<div id="conclusion" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> Conclusion<a href="removing-outliers-for-machine-learning.html#conclusion" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Cleaning outliers from your data properly, if you decide to do so, is a crucial part of data preprocessing and can lead to better predictions when done appropriately. You may want to run the analysis both with and without the suspected outliers, see how the model performs on each run, and then decide based on each model’s performance. Accuracy could improve, but it might also stay relatively the same or even worsen.</p>
+<p>The exact procedure you choose can depend on the nature of the dataset you have, taking into account factors such as data size and distribution. You could also build upon the methods shown here to develop your own outlier removal procedures.</p>
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/VarunVF/VarunVF.github.io/edit/main/05-removing-outliers.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["VarunVF's-Projects.pdf", "VarunVF's-Projects.epub", "VarunVF's-Projects.mobi"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
