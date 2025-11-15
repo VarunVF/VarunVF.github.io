@@ -309,8 +309,7 @@ Yellow is formed from mixing red and green in computer graphics. So from the abo
 <div id="accidentally-breaking-some-entities" class="section level2 hasAnchor" number="3.5">
 <h2><span class="header-section-number">3.5</span> Accidentally Breaking Some Entities<a href="my-experience-learning-to-write-shaders.html#accidentally-breaking-some-entities" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>While messing around with the various <code>gbuffers_*</code> programs, I broke the appearance of spider and enderman eyes. They just appeared somewhat translucent or invisible:</p>
-<p><img src="assets/shaderexp" />
-<img src="assets/shaderexp/spidereyes_broken.png" /></p>
+<p><img src="assets/shaderexp/spidereyes_broken.png" /></p>
 <p>I found that this was due to not overriding the <code>gbuffers_spidereyes</code> program. I had to add a ‘default’ <code>gbuffers_spidereyes.vsh</code> and <code>gbuffers_spidereyes.fsh</code> (the base shaders for most of the programs can be found on <a href="https://github.com/shaderLABS/Base-330">GitHub</a>). After the fix, my spiders and endermen look much better.</p>
 <p><img src="assets/shaderexp/spidereyes_fixed.png" /></p>
 </div>

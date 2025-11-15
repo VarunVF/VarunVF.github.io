@@ -77,7 +77,6 @@ Yellow is formed from mixing red and green in computer graphics. So from the abo
 
 While messing around with the various `gbuffers_*` programs, I broke the appearance of spider and enderman eyes. They just appeared somewhat translucent or invisible:
 
-![](assets/shaderexp/)
 ![](assets/shaderexp/spidereyes_broken.png)
 
 I found that this was due to not overriding the `gbuffers_spidereyes` program. I had to add a 'default' `gbuffers_spidereyes.vsh` and `gbuffers_spidereyes.fsh` (the base shaders for most of the programs can be found on [GitHub](https://github.com/shaderLABS/Base-330)). After the fix, my spiders and endermen look much better.
