@@ -27,3 +27,16 @@ writing-the-code
 directives-used
 writing-assembly-code
 hello-world-1
+my-experience-learning-to-write-shaders
+the-spark
+thinking-in-parallel-with-glsl
+coordinate-spaces
+deferred-shading
+visual-debugging-numbers-are-colors
+accidentally-breaking-some-entities
+the-shadow-acne-problem
+flexibility
+flexibility-for-users
+flexibility-for-multiple-platforms
+my-current-progress
+resources

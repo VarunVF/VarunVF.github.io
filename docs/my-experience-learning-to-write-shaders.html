@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 My Experience Learning to Write Shaders | VarunVF’s Projects</title>
+  <meta name="description" content="Chapter 3 My Experience Learning to Write Shaders | VarunVF’s Projects" />
+  <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 My Experience Learning to Write Shaders | VarunVF’s Projects" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 My Experience Learning to Write Shaders | VarunVF’s Projects" />
+  
+  
+  
+
+<meta name="author" content="VarunVF" />
+
+
+<meta name="date" content="2025-11-15" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="myOS.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><strong><a href="./">VarunVF's Projects</a></strong></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Hello World</a></li>
+<li class="chapter" data-level="1" data-path="jlox.html"><a href="jlox.html"><i class="fa fa-check"></i><b>1</b> jlox</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="jlox.html"><a href="jlox.html#motivation"><i class="fa fa-check"></i><b>1.1</b> Motivation</a></li>
+<li class="chapter" data-level="1.2" data-path="jlox.html"><a href="jlox.html#language-features"><i class="fa fa-check"></i><b>1.2</b> Language Features</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="jlox.html"><a href="jlox.html#data-types"><i class="fa fa-check"></i><b>1.2.1</b> Data Types</a></li>
+<li class="chapter" data-level="1.2.2" data-path="jlox.html"><a href="jlox.html#expressions"><i class="fa fa-check"></i><b>1.2.2</b> Expressions</a></li>
+<li class="chapter" data-level="1.2.3" data-path="jlox.html"><a href="jlox.html#control-flow"><i class="fa fa-check"></i><b>1.2.3</b> Control Flow</a></li>
+<li class="chapter" data-level="1.2.4" data-path="jlox.html"><a href="jlox.html#functions"><i class="fa fa-check"></i><b>1.2.4</b> Functions</a></li>
+<li class="chapter" data-level="1.2.5" data-path="jlox.html"><a href="jlox.html#classes"><i class="fa fa-check"></i><b>1.2.5</b> Classes</a></li>
+<li class="chapter" data-level="1.2.6" data-path="jlox.html"><a href="jlox.html#comments"><i class="fa fa-check"></i><b>1.2.6</b> Comments</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="myOS.html"><a href="myOS.html"><i class="fa fa-check"></i><b>2</b> Operating Systems</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="myOS.html"><a href="myOS.html#tools"><i class="fa fa-check"></i><b>2.1</b> Tools</a></li>
+<li class="chapter" data-level="2.2" data-path="myOS.html"><a href="myOS.html#background-information"><i class="fa fa-check"></i><b>2.2</b> Background Information</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="myOS.html"><a href="myOS.html#how-a-computer-starts-up"><i class="fa fa-check"></i><b>2.2.1</b> How a computer starts up</a></li>
+<li class="chapter" data-level="2.2.2" data-path="myOS.html"><a href="myOS.html#how-the-bios-finds-an-os-2-ways"><i class="fa fa-check"></i><b>2.2.2</b> How the BIOS finds an OS (2 ways):</a></li>
+<li class="chapter" data-level="2.2.3" data-path="myOS.html"><a href="myOS.html#memory-segmentation"><i class="fa fa-check"></i><b>2.2.3</b> Memory Segmentation</a></li>
+<li class="chapter" data-level="2.2.4" data-path="myOS.html"><a href="myOS.html#bootloader-and-kernel"><i class="fa fa-check"></i><b>2.2.4</b> Bootloader and Kernel</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="myOS.html"><a href="myOS.html#writing-the-code"><i class="fa fa-check"></i><b>2.3</b> Writing the code</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="myOS.html"><a href="myOS.html#directives-used"><i class="fa fa-check"></i><b>2.3.1</b> Directives Used</a></li>
+<li class="chapter" data-level="2.3.2" data-path="myOS.html"><a href="myOS.html#writing-assembly-code"><i class="fa fa-check"></i><b>2.3.2</b> Writing Assembly Code</a></li>
+<li class="chapter" data-level="2.3.3" data-path="myOS.html"><a href="myOS.html#hello-world-1"><i class="fa fa-check"></i><b>2.3.3</b> Hello, World!</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html"><i class="fa fa-check"></i><b>3</b> My Experience Learning to Write Shaders</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#the-spark"><i class="fa fa-check"></i><b>3.1</b> The Spark</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#thinking-in-parallel-with-glsl"><i class="fa fa-check"></i><b>3.1.1</b> Thinking in Parallel with GLSL</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#coordinate-spaces"><i class="fa fa-check"></i><b>3.2</b> Coordinate Spaces</a></li>
+<li class="chapter" data-level="3.3" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#deferred-shading"><i class="fa fa-check"></i><b>3.3</b> Deferred Shading</a></li>
+<li class="chapter" data-level="3.4" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#visual-debugging-numbers-are-colors"><i class="fa fa-check"></i><b>3.4</b> ‘Visual Debugging’: Numbers Are Colors</a></li>
+<li class="chapter" data-level="3.5" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#accidentally-breaking-some-entities"><i class="fa fa-check"></i><b>3.5</b> Accidentally Breaking Some Entities</a></li>
+<li class="chapter" data-level="3.6" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#the-shadow-acne-problem"><i class="fa fa-check"></i><b>3.6</b> The Shadow Acne Problem</a></li>
+<li class="chapter" data-level="3.7" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#flexibility"><i class="fa fa-check"></i><b>3.7</b> Flexibility</a>
+<ul>
+<li class="chapter" data-level="3.7.1" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#flexibility-for-users"><i class="fa fa-check"></i><b>3.7.1</b> Flexibility for Users</a></li>
+<li class="chapter" data-level="3.7.2" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#flexibility-for-multiple-platforms"><i class="fa fa-check"></i><b>3.7.2</b> Flexibility for Multiple Platforms</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#my-current-progress"><i class="fa fa-check"></i><b>3.8</b> My Current Progress</a></li>
+<li class="chapter" data-level="3.9" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#resources"><i class="fa fa-check"></i><b>3.9</b> Resources</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="_blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">VarunVF’s Projects</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="my-experience-learning-to-write-shaders" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> My Experience Learning to Write Shaders<a href="my-experience-learning-to-write-shaders.html#my-experience-learning-to-write-shaders" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="the-spark" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> The Spark<a href="my-experience-learning-to-write-shaders.html#the-spark" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>When I played Minecraft Pocket Edition (MCPE) years ago on my phone, my favourite shader was Entropy Shaders for Bedrock Edition (ESBE), written by McbeEringi. It not only greatly enhanced the visuals of the game, but also improved performance so that the game was much more playable on my phone.</p>
+<p>Today, when I tried loading up this same shader from nearly 4 years ago, it didn’t work. I then decided to look into how the shader itself was constructed - I unzipped the shaderpack to try and look into its files (<code>.mcpack</code> files are really just renamed <code>.zip</code> files) and figure out if something needed to be updated.</p>
+<p>After some searching, I learnt that Bedrock Edition had replaced its rendering system entirely with a new system called RenderDragon, which meant that old shaders were no longer compatible. Without patching the executable, custom shaderpacks are not supported.</p>
+<p>I still really wanted to somehow make ESBE work, or try to make a shader of my own. This made me want to learn how shaders actually work. While shaders on Bedrock Edition don’t work natively anymore, installations like OptiFine and Iris on Java Edition can run shaderpacks written for them and there is a lot of control over the rendering pipeline. As such, I started my journey of writing shaders on Java by following the <a href="https://shaders.properties/current/guides/your-first-shaderpack/0_intro/">official Iris Guide</a>.</p>
+<div id="thinking-in-parallel-with-glsl" class="section level3 hasAnchor" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Thinking in Parallel with GLSL<a href="my-experience-learning-to-write-shaders.html#thinking-in-parallel-with-glsl" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Minecraft shaders are usually written in OpenGL Shading Language (GLSL), which is very much like C but for the GPU. Each program has a main function <code>void main()</code>, and the syntax is also very close to C. You write a vertex shader and a fragment shader. The vertex shader is run on every vertex, while the fragment shader is run on every pixel.</p>
+<p>Suppose we want to find the average of a color in order to implement a grayscale filter. We might naturally write something like this to add each component and then divide by 3:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode glsl"><code class="sourceCode glsl"><span id="cb26-1"><a href="my-experience-learning-to-write-shaders.html#cb26-1" tabindex="-1"></a><span class="dt">float</span> grayscale <span class="op">=</span> <span class="op">(</span>color<span class="op">.</span><span class="fu">r</span> <span class="op">+</span> color<span class="op">.</span><span class="fu">g</span> <span class="op">+</span> color<span class="op">.</span><span class="fu">b</span><span class="op">)</span> <span class="op">/</span> <span class="fl">3.0</span><span class="op">;</span></span></code></pre></div>
+<p>However, we can write it simpler the following way by using <code>dot</code> (vector dot product):</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode glsl"><code class="sourceCode glsl"><span id="cb27-1"><a href="my-experience-learning-to-write-shaders.html#cb27-1" tabindex="-1"></a><span class="dt">float</span> grayscale <span class="op">=</span> <span class="bu">dot</span><span class="op">(</span>color<span class="op">,</span> <span class="dt">vec3</span><span class="op">(</span><span class="fl">1.0</span> <span class="op">/</span> <span class="fl">3.0</span><span class="op">));</span></span></code></pre></div>
+<p>This same concept of ‘thinking in parallel’ also applies when doing transformations from one space to another. Instead of ‘manually’ applying translation, scale, and rotation by accessing the position attribute directly, it’s simpler and more flexible to use Model, View and Projection matrices to apply transformations using matrix multiplication. (This links back to our discussion on <a href="#Coordinate%20Spaces">coordinate spaces</a> earlier.) Minecraft and most 3D graphics programs apply this same principle.</p>
+</div>
+</div>
+<div id="coordinate-spaces" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Coordinate Spaces<a href="my-experience-learning-to-write-shaders.html#coordinate-spaces" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>It’s a good idea to get the concept of coordinate spaces and transformations down before getting deep into shader code. The math involved is really applicable to all 3D graphics in general, not just Minecraft. There are a series of matrix transformations that are performed between these spaces, in order to draw three-dimensional vertices onto a two-dimensional screen.</p>
+<p>Although I was already aware of these concepts, I had to briefly revisit them before I could continue learning. Minecraft uses the same usual coordinate spaces along with a few additional ones that are specific to the game. The most important coordinate spaces that we should be familiar with, in my opinion, are the Model, World, View, Clip, and Screen spaces.</p>
+<p>Here’s a summary I wrote of the core spaces and the transformations done between them:</p>
+<table>
+<colgroup>
+<col width="9%" />
+<col width="10%" />
+<col width="15%" />
+<col width="63%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>From Space</th>
+<th>To Space</th>
+<th>Transformation</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>-</td>
+<td>Local Space</td>
+<td>-</td>
+<td>The object’s local coordinate system</td>
+</tr>
+<tr class="even">
+<td>Local Space</td>
+<td>World Space</td>
+<td>Model Matrix</td>
+<td>Place the object in the world</td>
+</tr>
+<tr class="odd">
+<td>World Space</td>
+<td>View Space</td>
+<td>View Matrix</td>
+<td>Place the world from the camera’s POV</td>
+</tr>
+<tr class="even">
+<td>View Space</td>
+<td>Clip Space</td>
+<td>Projection Matrix</td>
+<td>Project 3D coordinates onto a 2D plane, and prepare for clipping</td>
+</tr>
+<tr class="odd">
+<td>Clip Space</td>
+<td>NDC Space</td>
+<td>Perspective Divide</td>
+<td>Divide by the homogenous coordinate <code>w</code> to get vertices in <span class="math inline">\([-1.0, 1.0]\)</span></td>
+</tr>
+<tr class="even">
+<td>NDC Space</td>
+<td>Screen Space</td>
+<td>Viewport Transform</td>
+<td>Map NDC coords to screen coords, using the settings of <code>glViewport</code></td>
+</tr>
+</tbody>
+</table>
+<p>You can find more detail about these coordinate spaces and more on the <a href="https://learnopengl.com/Getting-started/Coordinate-Systems">LearnOpenGL lesson</a>, and the <a href="https://shaders.properties/current/how-to/coordinate_spaces/">Iris Shaders documentation page</a>.</p>
+</div>
+<div id="deferred-shading" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Deferred Shading<a href="my-experience-learning-to-write-shaders.html#deferred-shading" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>One thing that initially confused me was why lighting wasn’t calculated immediately in the geometry pass. It turns out Minecraft uses something called <a href="https://learnopengl.com/Advanced-Lighting/Deferred-Shading">deferred shading</a>. As scenes get more complex, doing geometry and lighting calculations in one pass can be wasteful as fragment shader output gets obscured by other objects that end up getting rendered on top.</p>
+<p>Leaving lighting for a later stage makes lighting calculations faster by storing geometry information such as normals, depth, and color into a set of buffers. These buffers are called g-buffers, and are written to in the geometry pass (in the <code>gbuffers_*</code> programs). This information is then used in the lighting pass, such as in the <code>composite</code> fullscreen pass, to shade the scene.</p>
+</div>
+<div id="visual-debugging-numbers-are-colors" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> ‘Visual Debugging’: Numbers Are Colors<a href="my-experience-learning-to-write-shaders.html#visual-debugging-numbers-are-colors" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>There isn’t really a way to verify the actual numbers that are passing through our vertex and fragment shaders. We can’t quite access a console to print debug statements like we normally would in a program written for the CPU.</p>
+<p>Then how do we go about debugging our programs? We draw the values we suspect to be wrong directly to the screen. This is also how the Iris guide teaches us to interpret values given to us in Minecraft’s lightmap.</p>
+<p>For reference, this is the original scene:</p>
+<p><img src="assets/shaderexp/lightmap_reference.png" /></p>
+<p>The lightmap has two components. We can associate the first component to the red channel and the second to the green channel. Then we draw it to the screen like so:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode glsl"><code class="sourceCode glsl"><span id="cb28-1"><a href="my-experience-learning-to-write-shaders.html#cb28-1" tabindex="-1"></a>color<span class="op">.</span><span class="fu">rgb</span> <span class="op">=</span> <span class="dt">vec3</span><span class="op">(</span>lightmap<span class="op">,</span> <span class="fl">0.0</span><span class="op">);</span></span></code></pre></div>
+<p>We should see something like this:</p>
+<p><img src="assets/shaderexp/lightmap.png" />
+Yellow is formed from mixing red and green in computer graphics. So from the above image, we learn that blocklight is in the red channel (first component of lightmap), and skylight is in the green channel (second component of lightmap).</p>
+</div>
+<div id="accidentally-breaking-some-entities" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Accidentally Breaking Some Entities<a href="my-experience-learning-to-write-shaders.html#accidentally-breaking-some-entities" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>While messing around with the various <code>gbuffers_*</code> programs, I broke the appearance of spider and enderman eyes. They just appeared somewhat translucent or invisible:</p>
+<p><img src="assets/shaderexp" />
+<img src="assets/shaderexp/spidereyes_broken.png" /></p>
+<p>I found that this was due to not overriding the <code>gbuffers_spidereyes</code> program. I had to add a ‘default’ <code>gbuffers_spidereyes.vsh</code> and <code>gbuffers_spidereyes.fsh</code> (the base shaders for most of the programs can be found on <a href="https://github.com/shaderLABS/Base-330">GitHub</a>). After the fix, my spiders and endermen look much better.</p>
+<p><img src="assets/shaderexp/spidereyes_fixed.png" /></p>
+</div>
+<div id="the-shadow-acne-problem" class="section level2 hasAnchor" number="3.6">
+<h2><span class="header-section-number">3.6</span> The Shadow Acne Problem<a href="my-experience-learning-to-write-shaders.html#the-shadow-acne-problem" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>An interesting problem I encountered when rendering shadows is the shadow acne problem, which occurs when objects cast shadows onto themselves. This is due to the limited resolution of the shadow map. As you can see, there are strange alternating shadow patterns on the terrain.</p>
+<p><img src="assets/shaderexp/shadow_acne.png" /></p>
+<p>To solve this, we must offset the object slightly in the direction of the light source (along the negative Z axis in shadow space). This offset is called the shadow bias, and it fixes most of the problem:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode glsl"><code class="sourceCode glsl"><span id="cb29-1"><a href="my-experience-learning-to-write-shaders.html#cb29-1" tabindex="-1"></a><span class="dt">const</span> <span class="dt">float</span> SHADOW_BIAS <span class="op">=</span> <span class="fl">0.001</span><span class="op">;</span></span>
+<span id="cb29-2"><a href="my-experience-learning-to-write-shaders.html#cb29-2" tabindex="-1"></a><span class="co">// ...</span></span>
+<span id="cb29-3"><a href="my-experience-learning-to-write-shaders.html#cb29-3" tabindex="-1"></a>shadowClipPos<span class="op">.</span><span class="fu">z</span> <span class="op">-=</span> SHADOW_BIAS<span class="op">;</span></span></code></pre></div>
+<p><img src="assets/shaderexp/shadow_biasing.png" /></p>
+<p>You can read about this problem in detail on <a href="https://learnopengl.com/Advanced-Lighting/Shadows/Shadow-Mapping">LearnOpenGL</a>.</p>
+</div>
+<div id="flexibility" class="section level2 hasAnchor" number="3.7">
+<h2><span class="header-section-number">3.7</span> Flexibility<a href="my-experience-learning-to-write-shaders.html#flexibility" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>After learning the core principles involved in just ‘getting the code to work’, I started looking into how to make the shader easy for people to actually use. More people will be able to enjoy using our shaders if we design them to be more flexible.</p>
+<div id="flexibility-for-users" class="section level3 hasAnchor" number="3.7.1">
+<h3><span class="header-section-number">3.7.1</span> Flexibility for Users<a href="my-experience-learning-to-write-shaders.html#flexibility-for-users" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We can expose various rendering options to users to configure via the GUI. This allows users to control the ultimate look and feel of their game, and adapt the shader settings depending on the performance capabilities of their device.</p>
+<p>These GUI options are defined through the <code>shaders.properties</code>file, which has a relatively simple format. The following short example defines a “Shadows” option menu which contains an option called <code>shadowMapResolution</code>.</p>
+<pre class="properties"><code>screen = [Shadows]
+screen.Shadows = shadowMapResolution
+# More options...</code></pre>
+<p>On Iris, in Shader Pack Settings, the interface produced will look like this (I’ve added several other options too):</p>
+<p><img src="assets/shaderexp/shader_pack_settings.png" /></p>
+<p>The option we defined is contained inside the “Shadows” menu:</p>
+<p><img src="assets/shaderexp/shader_pack_settings_shadows.png" /></p>
+</div>
+<div id="flexibility-for-multiple-platforms" class="section level3 hasAnchor" number="3.7.2">
+<h3><span class="header-section-number">3.7.2</span> Flexibility for Multiple Platforms<a href="my-experience-learning-to-write-shaders.html#flexibility-for-multiple-platforms" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If you want your shader to be able to run on many devices / platforms, you should be mindful about the availability of certain features, or stick to standard features. Iris itself has a goal of maintaining compatibility with OptiFine, although it offers more features. If you want your shader to also run on OptiFine, you should check for availability before using Iris-only features.</p>
+<p>While looking through ESBE source (it’s also on GitHub under MIT license), I found a detail about shader float precision. It turns out that support for high precision (<code>highp</code>) is not compulsory in the fragment shader, and only medium precision (<code>mediump</code>) might be available. The developer used a simple macro to switch accordingly:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode glsl"><code class="sourceCode glsl"><span id="cb31-1"><a href="my-experience-learning-to-write-shaders.html#cb31-1" tabindex="-1"></a><span class="pp">#ifdef GL_FRAGMENT_PRECISION_HIGH</span></span>
+<span id="cb31-2"><a href="my-experience-learning-to-write-shaders.html#cb31-2" tabindex="-1"></a>        #define HM <span class="dt">highp</span></span>
+<span id="cb31-3"><a href="my-experience-learning-to-write-shaders.html#cb31-3" tabindex="-1"></a><span class="pp">#else</span></span>
+<span id="cb31-4"><a href="my-experience-learning-to-write-shaders.html#cb31-4" tabindex="-1"></a>        #define HM <span class="dt">mediump</span></span>
+<span id="cb31-5"><a href="my-experience-learning-to-write-shaders.html#cb31-5" tabindex="-1"></a><span class="pp">#endif</span></span></code></pre></div>
+<p>The macro is used before a type to specify either a high precision or medium precision type, like this:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode glsl"><code class="sourceCode glsl"><span id="cb32-1"><a href="my-experience-learning-to-write-shaders.html#cb32-1" tabindex="-1"></a>HM <span class="dt">vec3</span> rpos<span class="op">=</span><span class="bu">reflect</span><span class="op">(</span>wpos<span class="op">,</span>n<span class="op">);</span></span></code></pre></div>
+<p>With this, the same source code can successfully compile on multiple devices, even if <code>highp</code> is not supported in the fragment shader.</p>
+</div>
+</div>
+<div id="my-current-progress" class="section level2 hasAnchor" number="3.8">
+<h2><span class="header-section-number">3.8</span> My Current Progress<a href="my-experience-learning-to-write-shaders.html#my-current-progress" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>So far, I’ve managed to get a small but working shader pipeline running. My shader currently has basic deferred lighting, simple shadows, and some small post-processing effects like custom fog and contrast adjustments. Along the way I encountered some funny rendering bugs, like entity eyes disappearing when I forgot to define the right program. I’m still learning, and my shader is far from perfect, but there’s something fascinating about being able to execute my code from within Minecraft and see its effects in real time.</p>
+<p><img src="assets/shaderexp/showcase_1.png" /></p>
+<p><img src="assets/shaderexp/showcase_2.png" /></p>
+<p>I’m still very early in this journey, and there’s a lot I want to explore next: soft shadows, better sky rendering, prettier water, and a better day/night cycle for lighting to name a few. Mostly, I’m trying to learn in small steps: modifying existing code, experimenting, and asking questions when something doesn’t behave as expected. Sometimes, I’ll graph things out on <a href="https://www.desmos.com/calculator">Desmos</a> to make sure an idea is mathematically sound before I implement it in code.</p>
+<p>Before starting this project, I couldn’t fathom how games like Minecraft were able to render such complex scenes to the screen. It felt like magic to me. Now, I’m glad that I understand even a tiny part of what’s happening under the hood.</p>
+</div>
+<div id="resources" class="section level2 hasAnchor" number="3.9">
+<h2><span class="header-section-number">3.9</span> Resources<a href="my-experience-learning-to-write-shaders.html#resources" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Thanks to the graphics community for their resources. Here are some resources that I found useful for learning:</p>
+<ul>
+<li><a href="https://m.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab">3b1b’s Linear Algebra Playlist</a></li>
+<li><a href="https://youtube.com/playlist?list=PLlrATfBNZ98foTJPJ_Ev03o2oq3-GGOS2&amp;si=ib0qWwjFgTjYI68-">The Cherno’s OpenGL Playlist</a></li>
+<li><a href="https://shaders.properties/current/guides/your-first-shaderpack/0_intro/">Iris Guide</a> and <a href="https://shaders.properties/current/reference/overview/">Reference</a></li>
+<li><a href="https://learnopengl.com/">LearnOpenGL</a></li>
+<li>ShaderLABS Discord Server</li>
+<li><a href="https://github.com/McbeEringi/esbe-3g/">ESBE source code</a> (written by McbeEringi)</li>
+</ul>
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="myOS.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/VarunVF/VarunVF.github.io/edit/main/03-shaderexp.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["VarunVF's-Projects.pdf", "VarunVF's-Projects.epub", "VarunVF's-Projects.mobi"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
