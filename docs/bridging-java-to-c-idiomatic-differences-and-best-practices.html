@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Bridging Java to C++: Idiomatic Differences and Best Practices | VarunVF’s Projects</title>
+  <meta name="description" content="Chapter 4 Bridging Java to C++: Idiomatic Differences and Best Practices | VarunVF’s Projects" />
+  <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Bridging Java to C++: Idiomatic Differences and Best Practices | VarunVF’s Projects" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Bridging Java to C++: Idiomatic Differences and Best Practices | VarunVF’s Projects" />
+  
+  
+  
+
+<meta name="author" content="VarunVF" />
+
+
+<meta name="date" content="2025-11-15" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="my-experience-learning-to-write-shaders.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><strong><a href="./">VarunVF's Projects</a></strong></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Hello World</a></li>
+<li class="chapter" data-level="1" data-path="jlox.html"><a href="jlox.html"><i class="fa fa-check"></i><b>1</b> jlox</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="jlox.html"><a href="jlox.html#motivation"><i class="fa fa-check"></i><b>1.1</b> Motivation</a></li>
+<li class="chapter" data-level="1.2" data-path="jlox.html"><a href="jlox.html#language-features"><i class="fa fa-check"></i><b>1.2</b> Language Features</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="jlox.html"><a href="jlox.html#data-types"><i class="fa fa-check"></i><b>1.2.1</b> Data Types</a></li>
+<li class="chapter" data-level="1.2.2" data-path="jlox.html"><a href="jlox.html#expressions"><i class="fa fa-check"></i><b>1.2.2</b> Expressions</a></li>
+<li class="chapter" data-level="1.2.3" data-path="jlox.html"><a href="jlox.html#control-flow"><i class="fa fa-check"></i><b>1.2.3</b> Control Flow</a></li>
+<li class="chapter" data-level="1.2.4" data-path="jlox.html"><a href="jlox.html#functions"><i class="fa fa-check"></i><b>1.2.4</b> Functions</a></li>
+<li class="chapter" data-level="1.2.5" data-path="jlox.html"><a href="jlox.html#classes"><i class="fa fa-check"></i><b>1.2.5</b> Classes</a></li>
+<li class="chapter" data-level="1.2.6" data-path="jlox.html"><a href="jlox.html#comments"><i class="fa fa-check"></i><b>1.2.6</b> Comments</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="myOS.html"><a href="myOS.html"><i class="fa fa-check"></i><b>2</b> Operating Systems</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="myOS.html"><a href="myOS.html#tools"><i class="fa fa-check"></i><b>2.1</b> Tools</a></li>
+<li class="chapter" data-level="2.2" data-path="myOS.html"><a href="myOS.html#background-information"><i class="fa fa-check"></i><b>2.2</b> Background Information</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="myOS.html"><a href="myOS.html#how-a-computer-starts-up"><i class="fa fa-check"></i><b>2.2.1</b> How a computer starts up</a></li>
+<li class="chapter" data-level="2.2.2" data-path="myOS.html"><a href="myOS.html#how-the-bios-finds-an-os-2-ways"><i class="fa fa-check"></i><b>2.2.2</b> How the BIOS finds an OS (2 ways):</a></li>
+<li class="chapter" data-level="2.2.3" data-path="myOS.html"><a href="myOS.html#memory-segmentation"><i class="fa fa-check"></i><b>2.2.3</b> Memory Segmentation</a></li>
+<li class="chapter" data-level="2.2.4" data-path="myOS.html"><a href="myOS.html#bootloader-and-kernel"><i class="fa fa-check"></i><b>2.2.4</b> Bootloader and Kernel</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="myOS.html"><a href="myOS.html#writing-the-code"><i class="fa fa-check"></i><b>2.3</b> Writing the code</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="myOS.html"><a href="myOS.html#directives-used"><i class="fa fa-check"></i><b>2.3.1</b> Directives Used</a></li>
+<li class="chapter" data-level="2.3.2" data-path="myOS.html"><a href="myOS.html#writing-assembly-code"><i class="fa fa-check"></i><b>2.3.2</b> Writing Assembly Code</a></li>
+<li class="chapter" data-level="2.3.3" data-path="myOS.html"><a href="myOS.html#hello-world-1"><i class="fa fa-check"></i><b>2.3.3</b> Hello, World!</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html"><i class="fa fa-check"></i><b>3</b> My Experience Learning to Write Shaders</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#the-spark"><i class="fa fa-check"></i><b>3.1</b> The Spark</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#thinking-in-parallel-with-glsl"><i class="fa fa-check"></i><b>3.1.1</b> Thinking in Parallel with GLSL</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#coordinate-spaces"><i class="fa fa-check"></i><b>3.2</b> Coordinate Spaces</a></li>
+<li class="chapter" data-level="3.3" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#deferred-shading"><i class="fa fa-check"></i><b>3.3</b> Deferred Shading</a></li>
+<li class="chapter" data-level="3.4" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#visual-debugging-numbers-are-colors"><i class="fa fa-check"></i><b>3.4</b> ‘Visual Debugging’: Numbers Are Colors</a></li>
+<li class="chapter" data-level="3.5" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#accidentally-breaking-some-entities"><i class="fa fa-check"></i><b>3.5</b> Accidentally Breaking Some Entities</a></li>
+<li class="chapter" data-level="3.6" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#the-shadow-acne-problem"><i class="fa fa-check"></i><b>3.6</b> The Shadow Acne Problem</a></li>
+<li class="chapter" data-level="3.7" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#flexibility"><i class="fa fa-check"></i><b>3.7</b> Flexibility</a>
+<ul>
+<li class="chapter" data-level="3.7.1" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#flexibility-for-users"><i class="fa fa-check"></i><b>3.7.1</b> Flexibility for Users</a></li>
+<li class="chapter" data-level="3.7.2" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#flexibility-for-multiple-platforms"><i class="fa fa-check"></i><b>3.7.2</b> Flexibility for Multiple Platforms</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#my-current-progress"><i class="fa fa-check"></i><b>3.8</b> My Current Progress</a></li>
+<li class="chapter" data-level="3.9" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#resources"><i class="fa fa-check"></i><b>3.9</b> Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="bridging-java-to-c-idiomatic-differences-and-best-practices.html"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html"><i class="fa fa-check"></i><b>4</b> Bridging Java to C++: Idiomatic Differences and Best Practices</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="bridging-java-to-c-idiomatic-differences-and-best-practices.html"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#dynamically-allocating-everything"><i class="fa fa-check"></i><b>4.1</b> Dynamically Allocating Everything</a></li>
+<li class="chapter" data-level="4.2" data-path="bridging-java-to-c-idiomatic-differences-and-best-practices.html"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#ignoring-memory-management"><i class="fa fa-check"></i><b>4.2</b> Ignoring Memory Management</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="bridging-java-to-c-idiomatic-differences-and-best-practices.html"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#an-important-note-about-ownership"><i class="fa fa-check"></i><b>4.2.1</b> An important note about ownership</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="bridging-java-to-c-idiomatic-differences-and-best-practices.html"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#not-everything-needs-to-be-a-class"><i class="fa fa-check"></i><b>4.3</b> Not Everything Needs to be a Class</a></li>
+<li class="chapter" data-level="4.4" data-path="bridging-java-to-c-idiomatic-differences-and-best-practices.html"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#pass-by-value-vs.-pass-by-reference"><i class="fa fa-check"></i><b>4.4</b> Pass-by-value vs. Pass-by-reference</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="_blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">VarunVF’s Projects</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="bridging-java-to-c-idiomatic-differences-and-best-practices" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Bridging Java to C++: Idiomatic Differences and Best Practices<a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#bridging-java-to-c-idiomatic-differences-and-best-practices" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Java and C++ share many object-oriented principles, but they differ significantly in terms of how they handle memory and object lifetimes.</p>
+<p>Having programmed in both languages, I want to share some common issues that developers transitioning from Java to C++ might encounter.</p>
+<div id="dynamically-allocating-everything" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Dynamically Allocating Everything<a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#dynamically-allocating-everything" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The following is commonly seen when creating new objects in Java:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb33-1"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb33-1" tabindex="-1"></a><span class="bu">Type</span> instance <span class="op">=</span> <span class="kw">new</span> <span class="bu">Type</span><span class="op">();</span></span></code></pre></div>
+<p>Developers coming from Java might instinctively write the following in C++:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb34-1"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb34-1" tabindex="-1"></a>Type <span class="op">*</span>instance <span class="op">=</span> <span class="kw">new</span> Type<span class="op">();</span></span></code></pre></div>
+<p>This is valid code, but note that this is a heap allocation. In C++, we can choose to stack-allocate instead, and simply write:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb35-1"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb35-1" tabindex="-1"></a>Type instance<span class="op">;</span></span></code></pre></div>
+<p>This form is often preferred in C++, as it avoids the overhead of dynamic allocation and indirection.</p>
+<p>However, there are times you cannot stack-allocate, such as in the following situations:</p>
+<ul>
+<li>You need lifetime beyond the current stack scope</li>
+<li>You need dynamically sized allocation (size only known at run-time)</li>
+<li>You need a very large allocation that would otherwise risk stack overflow</li>
+</ul>
+</div>
+<div id="ignoring-memory-management" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Ignoring Memory Management<a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#ignoring-memory-management" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Unlike Java, C++ does not have a garbage collector. This provides the programmer control over the precise lifetime of objects.</p>
+<p>This means it is the programmer’s responsibility to manually call ‘delete’ for any objects that were previously allocated via ‘new’ when they are no longer in use. Failing to do so properly can lead to several issues such as memory leaks, use-after-free bugs, or double-free bugs.</p>
+<p>To simplify this memory management, make use of scope-based resource management (RAII). RAII stands for “Resource Acquisition Is Initialization”. Simply put, this means whoever initialises a resource is considered the owner of that resource, and is thus responsible for deallocating it later on.</p>
+<p>Instead of trusting users to call a close, destroy, or similar “cleanup” method, write this logic in the destructor. This is where you close files, free pointers, and do any other cleanup that should happen at the end of the object’s lifetime. The destructor will automatically be called, and you can be assured that no resources will be leaked.</p>
+<p>(For the purpose of demonstrating RAII, the following example explicitly calls new and delete, and keeps track of a raw pointer (C pointer). However, in modern C++ you would typically use “smart pointers” which automate this and make it less error-prone.)</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb36-1"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb36-1" tabindex="-1"></a><span class="kw">class</span> ResourceManager</span>
+<span id="cb36-2"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb36-2" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb36-3"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb36-3" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb36-4"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb36-4" tabindex="-1"></a>    <span class="co">// Constructor</span></span>
+<span id="cb36-5"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb36-5" tabindex="-1"></a>    ResourceManager<span class="op">()</span></span>
+<span id="cb36-6"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb36-6" tabindex="-1"></a>    <span class="op">{</span></span>
+<span id="cb36-7"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb36-7" tabindex="-1"></a>        resource <span class="op">=</span> <span class="kw">new</span> <span class="dt">int</span><span class="op">(</span><span class="dv">0</span><span class="op">);</span></span>
+<span id="cb36-8"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb36-8" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb36-9"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb36-9" tabindex="-1"></a></span>
+<span id="cb36-10"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb36-10" tabindex="-1"></a>    <span class="co">// Destructor</span></span>
+<span id="cb36-11"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb36-11" tabindex="-1"></a>    <span class="op">~</span>ResourceManager<span class="op">()</span></span>
+<span id="cb36-12"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb36-12" tabindex="-1"></a>    <span class="op">{</span></span>
+<span id="cb36-13"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb36-13" tabindex="-1"></a>        <span class="kw">delete</span> resource<span class="op">;</span></span>
+<span id="cb36-14"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb36-14" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb36-15"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb36-15" tabindex="-1"></a></span>
+<span id="cb36-16"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb36-16" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb36-17"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb36-17" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>resource<span class="op">;</span></span>
+<span id="cb36-18"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb36-18" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb36-19"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb36-19" tabindex="-1"></a></span>
+<span id="cb36-20"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb36-20" tabindex="-1"></a></span>
+<span id="cb36-21"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb36-21" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb36-22"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb36-22" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb36-23"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb36-23" tabindex="-1"></a>    ResourceManager manager<span class="op">;</span></span>
+<span id="cb36-24"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb36-24" tabindex="-1"></a>    <span class="co">// ~ResourceManager() automatically called at end of scope</span></span>
+<span id="cb36-25"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb36-25" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>In order of preference, generally use:</p>
+<ol style="list-style-type: decimal">
+<li>stack allocation - simple and automatic</li>
+<li>smart pointer to heap:
+<ul>
+<li>std::unique_ptr - for exclusive ownership</li>
+<li>std::shared_ptr - for shared ownership (managed via reference counting)</li>
+</ul></li>
+<li>raw pointer to heap - avoid unless necessary, requires manual delete</li>
+</ol>
+<p>Smart pointers come from the &lt;memory&gt; standard header (see the next section on ownership for more info).</p>
+<div id="an-important-note-about-ownership" class="section level3 hasAnchor" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> An important note about ownership<a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#an-important-note-about-ownership" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Smart pointers are useful not only because they automate memory cleanup, but also because they make it much clearer who owns the resource being pointed to.</p>
+<p>A unique_ptr is named as such because it is the only pointer to a resource: it cannot be copied, only moved. (Its copy constructor is deleted.) At the end of its containing scope, it will free the resource automatically. There is no confusion about who owns the resource and who is supposed to free it.</p>
+<p>Another smart pointer, shared_ptr, also automates memory management, but it allows for more complex lifetimes that can extend beyond the current stack scope. shared_ptr is used when you need multiple owning references to the same resource. (An owning reference is one that causes the lifetime of the resource to extend, i.e. it increments the reference count.) It internally uses reference counting, and frees the underlying memory once the reference count reaches zero. Use shared_ptr when unique_ptr doesn’t suit your lifetime requirements.</p>
+<p>To learn more about smart pointers, you may refer to the <a href="https://en.cppreference.com/w/cpp/memory.html">cppreference page about the &lt;memory&gt; header</a>.</p>
+</div>
+</div>
+<div id="not-everything-needs-to-be-a-class" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Not Everything Needs to be a Class<a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#not-everything-needs-to-be-a-class" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>C++ gives you the freedom to choose your programming paradigm: object orientation isn’t your only option. C++ allows object-oriented, procedural, and functional programming styles. You don’t have to use a class if all you need is a free function, or some public fields without functionality.</p>
+<p>Classes with just a single method and no fields can be replaced by free functions if you wish. Similarly, classes with fields and no methods can be replaced by structures for clarity (which have public member access by default).</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb37-1"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb37-1" tabindex="-1"></a><span class="co">// Instead of this...</span></span>
+<span id="cb37-2"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb37-2" tabindex="-1"></a><span class="kw">class</span> Point2D</span>
+<span id="cb37-3"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb37-3" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb37-4"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb37-4" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb37-5"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb37-5" tabindex="-1"></a>    <span class="dt">int</span> x<span class="op">()</span> <span class="at">const</span><span class="op">;</span></span>
+<span id="cb37-6"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb37-6" tabindex="-1"></a>    <span class="dt">int</span> y<span class="op">()</span> <span class="at">const</span><span class="op">;</span></span>
+<span id="cb37-7"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb37-7" tabindex="-1"></a></span>
+<span id="cb37-8"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb37-8" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb37-9"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb37-9" tabindex="-1"></a>    <span class="dt">int</span> x<span class="op">,</span> y<span class="op">;</span></span>
+<span id="cb37-10"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb37-10" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb37-11"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb37-11" tabindex="-1"></a></span>
+<span id="cb37-12"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb37-12" tabindex="-1"></a><span class="co">// You may do this:</span></span>
+<span id="cb37-13"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb37-13" tabindex="-1"></a><span class="kw">struct</span> Point2D</span>
+<span id="cb37-14"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb37-14" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb37-15"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb37-15" tabindex="-1"></a>    <span class="dt">int</span> x<span class="op">,</span> y<span class="op">;</span></span>
+<span id="cb37-16"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb37-16" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<p>Structs can also have things like constructors and methods that classes can, so you may use them if you feel it makes more sense. I personally use structs to indicate that I’m actually more interested in the data rather than the functionality.</p>
+</div>
+<div id="pass-by-value-vs.-pass-by-reference" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Pass-by-value vs. Pass-by-reference<a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#pass-by-value-vs.-pass-by-reference" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Unlike Java, C++ allows you to directly specify in functions and methods about whether you want to pass a pointer to an object, a reference to an object, or a copy of the entire object itself (by value).</p>
+<p>Can you tell what’s wrong with this C++ function?</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb38-1"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb38-1" tabindex="-1"></a><span class="dt">void</span> insertValue<span class="op">(</span><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> nums<span class="op">,</span> <span class="dt">int</span> value<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb38-2"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb38-2" tabindex="-1"></a>    nums<span class="op">.</span>push_back<span class="op">(</span>value<span class="op">);</span></span>
+<span id="cb38-3"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb38-3" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>In C++, arguments are passed by value unless we explicitly make a reference. We have to be mindful of how we declare function parameters.</p>
+<p>Here, the vector is being passed by value, so the function will copy the entire vector (including copying its heap data).</p>
+<p>That means this example:</p>
+<ul>
+<li>unnecessarily allocates memory</li>
+<li>copies the entire contents of the vector into a local copy</li>
+<li>inserts a value into the copied vector</li>
+<li>destroys the copied vector</li>
+<li>doesn’t modify the caller’s vector at all</li>
+</ul>
+<p>To fix it, simply insert an ‘&amp;’ after the type to indicate passing by reference. No copies are made and the function works as expected.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb39-1"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb39-1" tabindex="-1"></a><span class="dt">void</span> insertValue<span class="op">(</span><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> <span class="op">&amp;</span>nums<span class="op">,</span> <span class="dt">int</span> value<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb39-2"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb39-2" tabindex="-1"></a>    nums<span class="op">.</span>push_back<span class="op">(</span>value<span class="op">);</span></span>
+<span id="cb39-3"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb39-3" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Additionally, if a function doesn’t need to modify the argument, you should pass by const reference instead. This relates to a concept in C++ called const-correctness. The benefit of this concept is that it prevents you from accidentally modifying something you didn’t expect would be modified.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb40-1"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb40-1" tabindex="-1"></a><span class="dt">void</span> printValues<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> <span class="op">&amp;</span>nums<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb40-2"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb40-2" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> number <span class="op">:</span> nums<span class="op">)</span></span>
+<span id="cb40-3"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb40-3" tabindex="-1"></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> number <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb40-4"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb40-4" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>What if we don’t mark the parameter as const&amp;, and try to pass a const vector argument, such as below?</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb41-1"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb41-1" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb41-2"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb41-2" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;vector&gt;</span></span>
+<span id="cb41-3"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb41-3" tabindex="-1"></a></span>
+<span id="cb41-4"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb41-4" tabindex="-1"></a><span class="dt">void</span> printValues<span class="op">(</span><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> <span class="op">&amp;</span>nums<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb41-5"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb41-5" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> number <span class="op">:</span> nums<span class="op">)</span></span>
+<span id="cb41-6"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb41-6" tabindex="-1"></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> number <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb41-7"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb41-7" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb41-8"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb41-8" tabindex="-1"></a></span>
+<span id="cb41-9"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb41-9" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb41-10"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb41-10" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb41-11"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb41-11" tabindex="-1"></a>    <span class="at">const</span> <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> myNumbers <span class="op">=</span> <span class="op">{</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span> <span class="op">};</span></span>
+<span id="cb41-12"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb41-12" tabindex="-1"></a>    printValues<span class="op">(</span>myNumbers<span class="op">);</span></span>
+<span id="cb41-13"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#cb41-13" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>We get a compile error about the const qualifier being discarded, which is not allowed (below output from x86-64 gcc 15.1).</p>
+<pre><code>&lt;source&gt;: In function &#39;int main()&#39;:
+&lt;source&gt;:13:17: error: binding reference of type &#39;std::vector&lt;int&gt;&amp;&#39; to &#39;const std::vector&lt;int&gt;&#39; discards qualifiers
+   13 |     printValues(myNumbers);
+      |                 ^~~~~~~~~
+&lt;source&gt;:5:36: note: initializing argument 1 of &#39;void printValues(std::vector&lt;int&gt;&amp;)&#39;
+    5 | void printValues(std::vector&lt;int&gt; &amp;nums) {
+      |                  ~~~~~~~~~~~~~~~~~~^~~~</code></pre>
+<p>The compiler has saved us from passing the const vector to a function which, according to the function signature, could potentially modify the vector.</p>
+<p>Const-correctness, if adhered to correctly, would also prevent us from calling non-const methods on the vector such as push_back inside our function.</p>
+<hr />
+<p>Java and C++ are both powerful and useful languages. Regardless of whether you prefer writing in Java, C++, or any other language, you will probably find more success if you adhere to the standard practices in your language of choice.</p>
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="my-experience-learning-to-write-shaders.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/VarunVF/VarunVF.github.io/edit/main/04-javacpp.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["VarunVF's-Projects.pdf", "VarunVF's-Projects.epub", "VarunVF's-Projects.mobi"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

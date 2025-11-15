@@ -1,0 +1,199 @@
+# Bridging Java to C++: Idiomatic Differences and Best Practices
+
+Java and C++ share many object-oriented principles, but they differ significantly in terms of how they handle memory and object lifetimes.
+
+Having programmed in both languages, I want to share some common issues that developers transitioning from Java to C++ might encounter.
+
+## Dynamically Allocating Everything
+
+The following is commonly seen when creating new objects in Java:
+
+```java
+Type instance = new Type();
+```
+
+Developers coming from Java might instinctively write the following in C++:
+
+```cpp
+Type *instance = new Type();
+```
+
+This is valid code, but note that this is a heap allocation. In C++, we can choose to stack-allocate instead, and simply write:
+
+```cpp
+Type instance;
+```
+
+This form is often preferred in C++, as it avoids the overhead of dynamic allocation and indirection.
+
+However, there are times you cannot stack-allocate, such as in the following situations:
+
+- You need lifetime beyond the current stack scope
+- You need dynamically sized allocation (size only known at run-time)
+- You need a very large allocation that would otherwise risk stack overflow
+
+## Ignoring Memory Management
+
+Unlike Java, C++ does not have a garbage collector. This provides the programmer control over the precise lifetime of objects.
+
+This means it is the programmer's responsibility to manually call 'delete' for any objects that were previously allocated via 'new' when they are no longer in use. Failing to do so properly can lead to several issues such as memory leaks, use-after-free bugs, or double-free bugs.
+
+To simplify this memory management, make use of scope-based resource management (RAII). RAII stands for "Resource Acquisition Is Initialization". Simply put, this means whoever initialises a resource is considered the owner of that resource, and is thus responsible for deallocating it later on.
+
+Instead of trusting users to call a close, destroy, or similar "cleanup" method, write this logic in the destructor. This is where you close files, free pointers, and do any other cleanup that should happen at the end of the object's lifetime. The destructor will automatically be called, and you can be assured that no resources will be leaked.
+
+(For the purpose of demonstrating RAII, the following example explicitly calls new and delete, and keeps track of a raw pointer (C pointer). However, in modern C++ you would typically use "smart pointers" which automate this and make it less error-prone.)
+
+```cpp
+class ResourceManager
+{
+public:
+    // Constructor
+    ResourceManager()
+    {
+        resource = new int(0);
+    }
+
+    // Destructor
+    ~ResourceManager()
+    {
+        delete resource;
+    }
+
+private:
+    int *resource;
+};
+
+
+int main()
+{
+    ResourceManager manager;
+    // ~ResourceManager() automatically called at end of scope
+}
+```
+
+In order of preference, generally use:
+
+1. stack allocation - simple and automatic
+2. smart pointer to heap:
+	- std::unique_ptr - for exclusive ownership
+	- std::shared_ptr - for shared ownership (managed via reference counting)
+3. raw pointer to heap - avoid unless necessary, requires manual delete
+
+Smart pointers come from the \<memory\> standard header (see the next section on ownership for more info).
+
+### An important note about ownership
+
+Smart pointers are useful not only because they automate memory cleanup, but also because they make it much clearer who owns the resource being pointed to.
+
+A unique_ptr is named as such because it is the only pointer to a resource: it cannot be copied, only moved. (Its copy constructor is deleted.) At the end of its containing scope, it will free the resource automatically. There is no confusion about who owns the resource and who is supposed to free it.
+
+Another smart pointer, shared_ptr, also automates memory management, but it allows for more complex lifetimes that can extend beyond the current stack scope. shared_ptr is used when you need multiple owning references to the same resource. (An owning reference is one that causes the lifetime of the resource to extend, i.e. it increments the reference count.) It internally uses reference counting, and frees the underlying memory once the reference count reaches zero. Use shared_ptr when unique_ptr doesn't suit your lifetime requirements.
+
+To learn more about smart pointers, you may refer to the [cppreference page about the \<memory\> header](https://en.cppreference.com/w/cpp/memory.html).
+
+## Not Everything Needs to be a Class
+
+C++ gives you the freedom to choose your programming paradigm: object orientation isn't your only option. C++ allows object-oriented, procedural, and functional programming styles. You don't have to use a class if all you need is a free function, or some public fields without functionality.
+
+Classes with just a single method and no fields can be replaced by free functions if you wish. Similarly, classes with fields and no methods can be replaced by structures for clarity (which have public member access by default).
+
+```cpp
+// Instead of this...
+class Point2D
+{
+public:
+    int x() const;
+    int y() const;
+
+private:
+    int x, y;
+};
+
+// You may do this:
+struct Point2D
+{
+    int x, y;
+};
+```
+
+Structs can also have things like constructors and methods that classes can, so you may use them if you feel it makes more sense. I personally use structs to indicate that I'm actually more interested in the data rather than the functionality.
+
+## Pass-by-value vs. Pass-by-reference
+
+Unlike Java, C++ allows you to directly specify in functions and methods about whether you want to pass a pointer to an object, a reference to an object, or a copy of the entire object itself (by value).
+
+Can you tell what's wrong with this C++ function?
+
+```cpp
+void insertValue(std::vector<int> nums, int value) {
+    nums.push_back(value);
+}
+```
+
+In C++, arguments are passed by value unless we explicitly make a reference. We have to be mindful of how we declare function parameters.
+
+Here, the vector is being passed by value, so the function will copy the entire vector (including copying its heap data).
+
+That means this example:
+
+- unnecessarily allocates memory
+- copies the entire contents of the vector into a local copy
+- inserts a value into the copied vector
+- destroys the copied vector
+- doesn't modify the caller's vector at all
+
+To fix it, simply insert an '&' after the type to indicate passing by reference. No copies are made and the function works as expected.
+
+```cpp
+void insertValue(std::vector<int> &nums, int value) {
+    nums.push_back(value);
+}
+```
+
+Additionally, if a function doesn't need to modify the argument, you should pass by const reference instead. This relates to a concept in C++ called const-correctness. The benefit of this concept is that it prevents you from accidentally modifying something you didn't expect would be modified.
+
+```cpp
+void printValues(const std::vector<int> &nums) {
+    for (int number : nums)
+        std::cout << number << "\n";
+}
+```
+
+What if we don't mark the parameter as const&, and try to pass a const vector argument, such as below?
+
+```cpp
+#include <iostream>
+#include <vector>
+
+void printValues(std::vector<int> &nums) {
+    for (int number : nums)
+        std::cout << number << "\n";
+}
+
+int main()
+{
+    const std::vector<int> myNumbers = { 1, 2, 3 };
+    printValues(myNumbers);
+}
+```
+
+We get a compile error about the const qualifier being discarded, which is not allowed (below output from x86-64 gcc 15.1).
+
+```
+<source>: In function 'int main()':
+<source>:13:17: error: binding reference of type 'std::vector<int>&' to 'const std::vector<int>' discards qualifiers
+   13 |     printValues(myNumbers);
+      |                 ^~~~~~~~~
+<source>:5:36: note: initializing argument 1 of 'void printValues(std::vector<int>&)'
+    5 | void printValues(std::vector<int> &nums) {
+      |                  ~~~~~~~~~~~~~~~~~~^~~~
+```
+
+The compiler has saved us from passing the const vector to a function which, according to the function signature, could potentially modify the vector.
+
+Const-correctness, if adhered to correctly, would also prevent us from calling non-const methods on the vector such as push_back inside our function.
+
+---
+
+Java and C++ are both powerful and useful languages. Regardless of whether you prefer writing in Java, C++, or any other language, you will probably find more success if you adhere to the standard practices in your language of choice.

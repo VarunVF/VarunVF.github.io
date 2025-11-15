@@ -40,3 +40,9 @@ flexibility-for-users
 flexibility-for-multiple-platforms
 my-current-progress
 resources
+bridging-java-to-c-idiomatic-differences-and-best-practices
+dynamically-allocating-everything
+ignoring-memory-management
+an-important-note-about-ownership
+not-everything-needs-to-be-a-class
+pass-by-value-vs.-pass-by-reference
