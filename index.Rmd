@@ -9,8 +9,35 @@ output:
   #bookdown::pdf_book: default
 ---
 
-# Hello World {-}
+# {-}
 
-This is a simple website to showcase my projects.
+Here are some of the projects and articles I've done.
+
+::: {.project-grid}
+
+::: {.project-card}
+<strong>Writing Minecraft Shaders</strong><br />
+My experience learning how to write shaders for Minecraft and several things I learnt about computer graphics along the way.<br />
+<span class="tag tag-glsl">glsl</span><br />
+<a href="my-experience-learning-to-write-shaders.html" class="custom-btn">Read More</a>
+:::
+
+::: {.project-card}
+<strong>Bridging Java and C++</strong><br />
+Best practices and ideas that one may consider adopting when transitioning from Java to C++.<br />
+<span class="tag tag-java">java</span>
+<span class="tag tag-cpp">cpp</span><br />
+<a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html" class="custom-btn">Read More</a>
+:::
+
+::: {.project-card}
+<strong>Removing Outliers for Machine Learning</strong><br />
+Some simple routines for cleaning up outliers in training data for machine learning, using the pandas library in Python.<br />
+<span class="tag tag-ml">ml</span>
+<span class="tag tag-python">python</span><br />
+<a href="removing-outliers-for-machine-learning.html" class="custom-btn">Read More</a>
+:::
+
+:::
 
 <!-- If you need PDF output, uncomment bookdown::pdf_book above in YAML. You will need a LaTeX installation, e.g., https://yihui.name/tinytex/ -->

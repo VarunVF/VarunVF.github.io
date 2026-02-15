@@ -1,0 +1,103 @@
+/* Container for project cards */
+.project-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 10px;
+  column-gap: 10px;
+}
+
+/* A "Card" look for project descriptions */
+.project-card {
+  padding: 20px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  color: #333333;
+}
+
+/* Mobile Responsive Adjustment */
+@media (max-width: 768px) {
+  .project-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 5px;
+    column-gap: 10px;
+  }
+}
+
+.color-theme-1 .project-card {  /* Sepia Theme styling */
+  background-color: #f4ecd8;
+  color: #5b4636;
+  border: 1px solid #d3c4a1;
+}
+
+.color-theme-2 .project-card {  /* Night Theme styling */
+  background-color: #2d3143;
+  color: #f3f3f3;
+  border: 1px solid #444;
+}
+
+
+/* Custom button style for anchors */
+.custom-btn {
+  /* Layout & Spacing */
+  display: inline-block;
+  padding: 12px 24px;
+
+  /* Text Styling */
+  text-decoration: none;
+  font-family: sans-serif;
+  font-weight: 600;
+  color: #ffffff;
+
+  /* Background & Border */
+  background-color: #007bff;
+  border-radius: 8px;
+  border: none;
+
+  /* Interaction & Transition */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.custom-btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px); /* Slight lift effect */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.custom-btn:active {
+  transform: translateY(0); /* Returns to normal on click */
+}
+
+
+/* Base Tag Style */
+.tag {
+  display: inline-block;
+  padding: 2px 10px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 7px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+
+  font-family: 'Consolas', monospace;
+  font-size: 0.75em;
+  font-weight: bold;
+  /* text-transform: uppercase; */
+  letter-spacing: 0.5px;
+}
+
+.tag-glsl { background-color: #33cccc80; color: #196666; }
+.tag-java { background-color: #f8982080; color: #7c4c10; }
+.tag-cpp { background-color: #5599ff80; color: #2a4c7f; }
+.tag-ml { background-color: #9900cc80; color: #4c0066; }
+.tag-python { background-color: #e7dc0780; color: #736e03; }
+/* No override for Sepia Theme */
+.color-theme-2 .tag-glsl { background-color: #33cccc40; color: #33cccc; }
+.color-theme-2 .tag-java { background-color: #f8982040; color: #f89820; }
+.color-theme-2 .tag-cpp { background-color: #5599ff40; color: #5599ff; }
+.color-theme-2 .tag-ml { background-color: #9900cc40; color: #aa44ee; }
+.color-theme-2 .tag-python { background-color: #e7dc0740; color: #e7dc07; }

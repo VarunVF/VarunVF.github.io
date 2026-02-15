@@ -26,7 +26,7 @@ bootloader-and-kernel
 writing-the-code
 directives-used
 writing-assembly-code
-hello-world-1
+hello-world
 my-experience-learning-to-write-shaders
 the-spark
 thinking-in-parallel-with-glsl

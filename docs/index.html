@@ -23,7 +23,7 @@
 <meta name="author" content="VarunVF" />
 
 
-<meta name="date" content="2025-11-15" />
+<meta name="date" content="2026-02-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -125,6 +125,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 </style>
 
+<link rel="stylesheet" href="custom_style.css" type="text/css" />
 </head>
 
 <body>
@@ -140,7 +141,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><strong><a href="./">VarunVF's Projects</a></strong></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Hello World</a></li>
+<li><a href="index.html#section" id="toc-section"></a></li>
 <li class="chapter" data-level="1" data-path="jlox.html"><a href="jlox.html"><i class="fa fa-check"></i><b>1</b> jlox</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="jlox.html"><a href="jlox.html#motivation"><i class="fa fa-check"></i><b>1.1</b> Motivation</a></li>
@@ -168,7 +169,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.3.1" data-path="myOS.html"><a href="myOS.html#directives-used"><i class="fa fa-check"></i><b>2.3.1</b> Directives Used</a></li>
 <li class="chapter" data-level="2.3.2" data-path="myOS.html"><a href="myOS.html#writing-assembly-code"><i class="fa fa-check"></i><b>2.3.2</b> Writing Assembly Code</a></li>
-<li class="chapter" data-level="2.3.3" data-path="myOS.html"><a href="myOS.html#hello-world-1"><i class="fa fa-check"></i><b>2.3.3</b> Hello, World!</a></li>
+<li class="chapter" data-level="2.3.3" data-path="myOS.html"><a href="myOS.html#hello-world"><i class="fa fa-check"></i><b>2.3.3</b> Hello, World!</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html"><i class="fa fa-check"></i><b>3</b> My Experience Learning to Write Shaders</a>
@@ -236,11 +237,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">VarunVF’s Projects</h1>
 <p class="author"><em>VarunVF</em></p>
-<p class="date"><em>2025-11-15</em></p>
+<p class="date"><em>2026-02-15</em></p>
 </div>
-<div id="hello-world" class="section level1 unnumbered hasAnchor">
-<h1>Hello World<a href="index.html#hello-world" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This is a simple website to showcase my projects.</p>
+<div id="section" class="section level1 unnumbered">
+<h1 class="unnumbered"></h1>
+<p>Here are some of the projects and articles I’ve done.</p>
+<div class="project-grid">
+<div class="project-card">
+<p><strong>Writing Minecraft Shaders</strong><br />
+My experience learning how to write shaders for Minecraft and several things I learnt about computer graphics along the way.<br />
+<span class="tag tag-glsl">glsl</span><br />
+<a href="my-experience-learning-to-write-shaders.html" class="custom-btn">Read More</a></p>
+</div>
+<div class="project-card">
+<p><strong>Bridging Java and C++</strong><br />
+Best practices and ideas that one may consider adopting when transitioning from Java to C++.<br />
+<span class="tag tag-java">java</span>
+<span class="tag tag-cpp">cpp</span><br />
+<a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html" class="custom-btn">Read More</a></p>
+</div>
+<div class="project-card">
+<p><strong>Removing Outliers for Machine Learning</strong><br />
+Some simple routines for cleaning up outliers in training data for machine learning, using the pandas library in Python.<br />
+<span class="tag tag-ml">ml</span>
+<span class="tag tag-python">python</span><br />
+<a href="removing-outliers-for-machine-learning.html" class="custom-btn">Read More</a></p>
+</div>
+</div>
 <!-- If you need PDF output, uncomment bookdown::pdf_book above in YAML. You will need a LaTeX installation, e.g., https://yihui.name/tinytex/ -->
 
 </div>
