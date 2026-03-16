@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 What Rust Taught Me About Writing Better C++ | VarunVF’s Projects</title>
+  <meta name="description" content="Chapter 6 What Rust Taught Me About Writing Better C++ | VarunVF’s Projects" />
+  <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 What Rust Taught Me About Writing Better C++ | VarunVF’s Projects" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 What Rust Taught Me About Writing Better C++ | VarunVF’s Projects" />
+  
+  
+  
+
+<meta name="author" content="VarunVF" />
+
+
+<meta name="date" content="2026-03-16" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="removing-outliers-for-machine-learning.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="custom_style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><strong><a href="./">VarunVF's Projects</a></strong></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section" id="toc-section"></a></li>
+<li class="chapter" data-level="1" data-path="jlox.html"><a href="jlox.html"><i class="fa fa-check"></i><b>1</b> jlox</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="jlox.html"><a href="jlox.html#motivation"><i class="fa fa-check"></i><b>1.1</b> Motivation</a></li>
+<li class="chapter" data-level="1.2" data-path="jlox.html"><a href="jlox.html#language-features"><i class="fa fa-check"></i><b>1.2</b> Language Features</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="jlox.html"><a href="jlox.html#data-types"><i class="fa fa-check"></i><b>1.2.1</b> Data Types</a></li>
+<li class="chapter" data-level="1.2.2" data-path="jlox.html"><a href="jlox.html#expressions"><i class="fa fa-check"></i><b>1.2.2</b> Expressions</a></li>
+<li class="chapter" data-level="1.2.3" data-path="jlox.html"><a href="jlox.html#control-flow"><i class="fa fa-check"></i><b>1.2.3</b> Control Flow</a></li>
+<li class="chapter" data-level="1.2.4" data-path="jlox.html"><a href="jlox.html#functions"><i class="fa fa-check"></i><b>1.2.4</b> Functions</a></li>
+<li class="chapter" data-level="1.2.5" data-path="jlox.html"><a href="jlox.html#classes"><i class="fa fa-check"></i><b>1.2.5</b> Classes</a></li>
+<li class="chapter" data-level="1.2.6" data-path="jlox.html"><a href="jlox.html#comments"><i class="fa fa-check"></i><b>1.2.6</b> Comments</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="myOS.html"><a href="myOS.html"><i class="fa fa-check"></i><b>2</b> Operating Systems</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="myOS.html"><a href="myOS.html#tools"><i class="fa fa-check"></i><b>2.1</b> Tools</a></li>
+<li class="chapter" data-level="2.2" data-path="myOS.html"><a href="myOS.html#background-information"><i class="fa fa-check"></i><b>2.2</b> Background Information</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="myOS.html"><a href="myOS.html#how-a-computer-starts-up"><i class="fa fa-check"></i><b>2.2.1</b> How a computer starts up</a></li>
+<li class="chapter" data-level="2.2.2" data-path="myOS.html"><a href="myOS.html#how-the-bios-finds-an-os-2-ways"><i class="fa fa-check"></i><b>2.2.2</b> How the BIOS finds an OS (2 ways):</a></li>
+<li class="chapter" data-level="2.2.3" data-path="myOS.html"><a href="myOS.html#memory-segmentation"><i class="fa fa-check"></i><b>2.2.3</b> Memory Segmentation</a></li>
+<li class="chapter" data-level="2.2.4" data-path="myOS.html"><a href="myOS.html#bootloader-and-kernel"><i class="fa fa-check"></i><b>2.2.4</b> Bootloader and Kernel</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="myOS.html"><a href="myOS.html#writing-the-code"><i class="fa fa-check"></i><b>2.3</b> Writing the code</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="myOS.html"><a href="myOS.html#directives-used"><i class="fa fa-check"></i><b>2.3.1</b> Directives Used</a></li>
+<li class="chapter" data-level="2.3.2" data-path="myOS.html"><a href="myOS.html#writing-assembly-code"><i class="fa fa-check"></i><b>2.3.2</b> Writing Assembly Code</a></li>
+<li class="chapter" data-level="2.3.3" data-path="myOS.html"><a href="myOS.html#hello-world"><i class="fa fa-check"></i><b>2.3.3</b> Hello, World!</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html"><i class="fa fa-check"></i><b>3</b> My Experience Learning to Write Shaders</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#the-spark"><i class="fa fa-check"></i><b>3.1</b> The Spark</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#thinking-in-parallel-with-glsl"><i class="fa fa-check"></i><b>3.1.1</b> Thinking in Parallel with GLSL</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#coordinate-spaces"><i class="fa fa-check"></i><b>3.2</b> Coordinate Spaces</a></li>
+<li class="chapter" data-level="3.3" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#deferred-shading"><i class="fa fa-check"></i><b>3.3</b> Deferred Shading</a></li>
+<li class="chapter" data-level="3.4" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#visual-debugging-numbers-are-colors"><i class="fa fa-check"></i><b>3.4</b> ‘Visual Debugging’: Numbers Are Colors</a></li>
+<li class="chapter" data-level="3.5" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#accidentally-breaking-some-entities"><i class="fa fa-check"></i><b>3.5</b> Accidentally Breaking Some Entities</a></li>
+<li class="chapter" data-level="3.6" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#the-shadow-acne-problem"><i class="fa fa-check"></i><b>3.6</b> The Shadow Acne Problem</a></li>
+<li class="chapter" data-level="3.7" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#flexibility"><i class="fa fa-check"></i><b>3.7</b> Flexibility</a>
+<ul>
+<li class="chapter" data-level="3.7.1" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#flexibility-for-users"><i class="fa fa-check"></i><b>3.7.1</b> Flexibility for Users</a></li>
+<li class="chapter" data-level="3.7.2" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#flexibility-for-multiple-platforms"><i class="fa fa-check"></i><b>3.7.2</b> Flexibility for Multiple Platforms</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#my-current-progress"><i class="fa fa-check"></i><b>3.8</b> My Current Progress</a></li>
+<li class="chapter" data-level="3.9" data-path="my-experience-learning-to-write-shaders.html"><a href="my-experience-learning-to-write-shaders.html#resources"><i class="fa fa-check"></i><b>3.9</b> Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="bridging-java-to-c-idiomatic-differences-and-best-practices.html"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html"><i class="fa fa-check"></i><b>4</b> Bridging Java to C++: Idiomatic Differences and Best Practices</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="bridging-java-to-c-idiomatic-differences-and-best-practices.html"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#dynamically-allocating-everything"><i class="fa fa-check"></i><b>4.1</b> Dynamically Allocating Everything</a></li>
+<li class="chapter" data-level="4.2" data-path="bridging-java-to-c-idiomatic-differences-and-best-practices.html"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#ignoring-memory-management"><i class="fa fa-check"></i><b>4.2</b> Ignoring Memory Management</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="bridging-java-to-c-idiomatic-differences-and-best-practices.html"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#an-important-note-about-ownership"><i class="fa fa-check"></i><b>4.2.1</b> An important note about ownership</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="bridging-java-to-c-idiomatic-differences-and-best-practices.html"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#not-everything-needs-to-be-a-class"><i class="fa fa-check"></i><b>4.3</b> Not Everything Needs to be a Class</a></li>
+<li class="chapter" data-level="4.4" data-path="bridging-java-to-c-idiomatic-differences-and-best-practices.html"><a href="bridging-java-to-c-idiomatic-differences-and-best-practices.html#pass-by-value-vs.-pass-by-reference"><i class="fa fa-check"></i><b>4.4</b> Pass-by-value vs. Pass-by-reference</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="removing-outliers-for-machine-learning.html"><a href="removing-outliers-for-machine-learning.html"><i class="fa fa-check"></i><b>5</b> Removing Outliers for Machine Learning</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="removing-outliers-for-machine-learning.html"><a href="removing-outliers-for-machine-learning.html#what-are-outliers"><i class="fa fa-check"></i><b>5.1</b> What are outliers?</a></li>
+<li class="chapter" data-level="5.2" data-path="removing-outliers-for-machine-learning.html"><a href="removing-outliers-for-machine-learning.html#why-should-we-remove-outliers"><i class="fa fa-check"></i><b>5.2</b> Why should we remove outliers?</a></li>
+<li class="chapter" data-level="5.3" data-path="removing-outliers-for-machine-learning.html"><a href="removing-outliers-for-machine-learning.html#deciding-which-values-are-outliers"><i class="fa fa-check"></i><b>5.3</b> Deciding which values are outliers</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="removing-outliers-for-machine-learning.html"><a href="removing-outliers-for-machine-learning.html#cutoff-value"><i class="fa fa-check"></i><b>5.3.1</b> Cutoff value</a></li>
+<li class="chapter" data-level="5.3.2" data-path="removing-outliers-for-machine-learning.html"><a href="removing-outliers-for-machine-learning.html#interquartile-range-iqr"><i class="fa fa-check"></i><b>5.3.2</b> Interquartile Range (IQR)</a></li>
+<li class="chapter" data-level="5.3.3" data-path="removing-outliers-for-machine-learning.html"><a href="removing-outliers-for-machine-learning.html#z-score"><i class="fa fa-check"></i><b>5.3.3</b> Z-Score</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="removing-outliers-for-machine-learning.html"><a href="removing-outliers-for-machine-learning.html#example"><i class="fa fa-check"></i><b>5.4</b> Example</a></li>
+<li class="chapter" data-level="5.5" data-path="removing-outliers-for-machine-learning.html"><a href="removing-outliers-for-machine-learning.html#conclusion"><i class="fa fa-check"></i><b>5.5</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="what-rust-taught-me-about-writing-better-c.html"><a href="what-rust-taught-me-about-writing-better-c.html"><i class="fa fa-check"></i><b>6</b> What Rust Taught Me About Writing Better C++</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="what-rust-taught-me-about-writing-better-c.html"><a href="what-rust-taught-me-about-writing-better-c.html#pattern-matching"><i class="fa fa-check"></i><b>6.1</b> Pattern matching</a></li>
+<li class="chapter" data-level="6.2" data-path="what-rust-taught-me-about-writing-better-c.html"><a href="what-rust-taught-me-about-writing-better-c.html#errors-as-values"><i class="fa fa-check"></i><b>6.2</b> Errors as values</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="what-rust-taught-me-about-writing-better-c.html"><a href="what-rust-taught-me-about-writing-better-c.html#option"><i class="fa fa-check"></i><b>6.2.1</b> <code>Option</code></a></li>
+<li class="chapter" data-level="6.2.2" data-path="what-rust-taught-me-about-writing-better-c.html"><a href="what-rust-taught-me-about-writing-better-c.html#result"><i class="fa fa-check"></i><b>6.2.2</b> <code>Result</code></a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="_blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">VarunVF’s Projects</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="what-rust-taught-me-about-writing-better-c" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">Chapter 6</span> What Rust Taught Me About Writing Better C++<a href="what-rust-taught-me-about-writing-better-c.html#what-rust-taught-me-about-writing-better-c" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>In my personal projects, I usually default to C++ for anything involving low-level systems. Recently, I’ve heard a lot about Rust and its various memory and type safety measures, so I decided to give it a try. After spending some time learning about Rust (and trying to write better C++), I’m sharing some features I liked and how these concepts can be applied to write better C++ code.</p>
+<p>In each section, I’ll go over one Rust feature I found interesting, and show how we can replicate it in C++ (using C++23).</p>
+<hr />
+<div id="pattern-matching" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Pattern matching<a href="what-rust-taught-me-about-writing-better-c.html#pattern-matching" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Rust has powerful pattern matching via the <code>match</code> expression. Each branch in a <code>match</code> expression is called a ‘match arm’. Pattern matching is supported in the left-hand side of these arms. In the example below, the last match arm uses the wildcard <code>_</code>. This is a catch-all that is reached if none of the arms above it match.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb49-1"><a href="what-rust-taught-me-about-writing-better-c.html#cb49-1" tabindex="-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb49-2"><a href="what-rust-taught-me-about-writing-better-c.html#cb49-2" tabindex="-1"></a>    <span class="kw">let</span> number <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb49-3"><a href="what-rust-taught-me-about-writing-better-c.html#cb49-3" tabindex="-1"></a></span>
+<span id="cb49-4"><a href="what-rust-taught-me-about-writing-better-c.html#cb49-4" tabindex="-1"></a>    <span class="kw">let</span> description <span class="op">=</span> <span class="cf">match</span> number <span class="op">{</span></span>
+<span id="cb49-5"><a href="what-rust-taught-me-about-writing-better-c.html#cb49-5" tabindex="-1"></a>        <span class="dv">1</span> <span class="op">=&gt;</span> <span class="st">&quot;one&quot;</span><span class="op">,</span></span>
+<span id="cb49-6"><a href="what-rust-taught-me-about-writing-better-c.html#cb49-6" tabindex="-1"></a>        <span class="dv">2</span> <span class="op">=&gt;</span> <span class="st">&quot;two&quot;</span><span class="op">,</span></span>
+<span id="cb49-7"><a href="what-rust-taught-me-about-writing-better-c.html#cb49-7" tabindex="-1"></a>        <span class="dv">3</span> <span class="op">=&gt;</span> <span class="st">&quot;three&quot;</span><span class="op">,</span></span>
+<span id="cb49-8"><a href="what-rust-taught-me-about-writing-better-c.html#cb49-8" tabindex="-1"></a>        _ <span class="op">=&gt;</span> <span class="st">&quot;something else&quot;</span><span class="op">,</span></span>
+<span id="cb49-9"><a href="what-rust-taught-me-about-writing-better-c.html#cb49-9" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb49-10"><a href="what-rust-taught-me-about-writing-better-c.html#cb49-10" tabindex="-1"></a></span>
+<span id="cb49-11"><a href="what-rust-taught-me-about-writing-better-c.html#cb49-11" tabindex="-1"></a>    <span class="pp">println!</span>(<span class="st">&quot;Number is: {}&quot;</span><span class="op">,</span> description)<span class="op">;</span></span>
+<span id="cb49-12"><a href="what-rust-taught-me-about-writing-better-c.html#cb49-12" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Because <code>match</code> is an expression, it has been used here to return a value, which makes the code more concise. Match arms even support <a href="https://doc.rust-lang.org/rust-by-example/flow_control/match/guard.html">guards</a> to filter the arm. With <code>match</code> expressions, the Rust compiler forces you to handle all possible cases. In C++, you must remember to write each case of a switch statement, or provide a <code>default</code>. (You also need to remember to add <code>break;</code> for each case to prevent accidental fallthrough.)</p>
+<p>In addition to the <code>match</code> expression, there are also expressions like <code>if let</code> and <code>let else</code>, and the <code>matches!</code> macro, which are all tools for pattern matching with different uses.</p>
+<div id="applying-this-to-c" class="section level4 hasAnchor" number="6.1.0.1">
+<h4><span class="header-section-number">6.1.0.1</span> Applying this to C++<a href="what-rust-taught-me-about-writing-better-c.html#applying-this-to-c" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>For now, C++ does this using a <code>switch</code> statement. <a href="https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2020/p1371r3.pdf">Perhaps in future C++ versions</a>, we will have a direct equivalent to Rust’s <code>match</code> expressions. However, we can make <code>switch</code> act like an expression by wrapping it in a lambda that gets immediately called.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb50-1"><a href="what-rust-taught-me-about-writing-better-c.html#cb50-1" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;print&gt;</span></span>
+<span id="cb50-2"><a href="what-rust-taught-me-about-writing-better-c.html#cb50-2" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string_view&gt;</span></span>
+<span id="cb50-3"><a href="what-rust-taught-me-about-writing-better-c.html#cb50-3" tabindex="-1"></a></span>
+<span id="cb50-4"><a href="what-rust-taught-me-about-writing-better-c.html#cb50-4" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb50-5"><a href="what-rust-taught-me-about-writing-better-c.html#cb50-5" tabindex="-1"></a>    <span class="dt">int</span> number <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb50-6"><a href="what-rust-taught-me-about-writing-better-c.html#cb50-6" tabindex="-1"></a></span>
+<span id="cb50-7"><a href="what-rust-taught-me-about-writing-better-c.html#cb50-7" tabindex="-1"></a>    <span class="co">// Use a lambda to make the switch act like an expression</span></span>
+<span id="cb50-8"><a href="what-rust-taught-me-about-writing-better-c.html#cb50-8" tabindex="-1"></a>    <span class="bu">std::</span>string_view description <span class="op">=</span> <span class="op">[</span>number<span class="op">]</span> <span class="op">{</span></span>
+<span id="cb50-9"><a href="what-rust-taught-me-about-writing-better-c.html#cb50-9" tabindex="-1"></a>        <span class="cf">switch</span> <span class="op">(</span>number<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb50-10"><a href="what-rust-taught-me-about-writing-better-c.html#cb50-10" tabindex="-1"></a>            <span class="cf">case</span> <span class="dv">1</span><span class="op">:</span>  <span class="cf">return</span> <span class="st">&quot;one&quot;</span><span class="op">;</span></span>
+<span id="cb50-11"><a href="what-rust-taught-me-about-writing-better-c.html#cb50-11" tabindex="-1"></a>            <span class="cf">case</span> <span class="dv">2</span><span class="op">:</span>  <span class="cf">return</span> <span class="st">&quot;two&quot;</span><span class="op">;</span></span>
+<span id="cb50-12"><a href="what-rust-taught-me-about-writing-better-c.html#cb50-12" tabindex="-1"></a>            <span class="cf">case</span> <span class="dv">3</span><span class="op">:</span>  <span class="cf">return</span> <span class="st">&quot;three&quot;</span><span class="op">;</span></span>
+<span id="cb50-13"><a href="what-rust-taught-me-about-writing-better-c.html#cb50-13" tabindex="-1"></a>            <span class="cf">default</span><span class="op">:</span> <span class="cf">return</span> <span class="st">&quot;something else&quot;</span><span class="op">;</span></span>
+<span id="cb50-14"><a href="what-rust-taught-me-about-writing-better-c.html#cb50-14" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb50-15"><a href="what-rust-taught-me-about-writing-better-c.html#cb50-15" tabindex="-1"></a>    <span class="op">}();</span> <span class="co">// The () at the end calls the lambda immediately</span></span>
+<span id="cb50-16"><a href="what-rust-taught-me-about-writing-better-c.html#cb50-16" tabindex="-1"></a></span>
+<span id="cb50-17"><a href="what-rust-taught-me-about-writing-better-c.html#cb50-17" tabindex="-1"></a>    <span class="bu">std::</span>println<span class="op">(</span><span class="st">&quot;Number is: </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> description<span class="op">);</span></span>
+<span id="cb50-18"><a href="what-rust-taught-me-about-writing-better-c.html#cb50-18" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</div>
+</div>
+<div id="errors-as-values" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Errors as values<a href="what-rust-taught-me-about-writing-better-c.html#errors-as-values" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Idiomatic Rust encourages explicit error handling. Unlike other languages like C++ or Python where exceptions are a side-channel result of functions, in Rust errors are directly values. There are two main ways to represent such values in Rust: <code>Option</code> and <code>Result</code>. Once we have an <code>Option</code> or <code>Result</code>, we can <code>match</code> on its value or call methods like <code>is_some()</code> or <code>is_ok()</code> to check its state.</p>
+<div id="option" class="section level3 hasAnchor" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> <code>Option</code><a href="what-rust-taught-me-about-writing-better-c.html#option" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>An <code>Option</code> is used to indicate that a value may or may not be available. This is safer than returning a null pointer, for example, because it obliges the caller to handle the possibility that no value is present.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb51-1"><a href="what-rust-taught-me-about-writing-better-c.html#cb51-1" tabindex="-1"></a><span class="kw">fn</span> divide(dividend<span class="op">:</span> <span class="dt">f64</span><span class="op">,</span> divisor<span class="op">:</span> <span class="dt">f64</span>) <span class="op">-&gt;</span> <span class="dt">Option</span><span class="op">&lt;</span><span class="dt">f64</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb51-2"><a href="what-rust-taught-me-about-writing-better-c.html#cb51-2" tabindex="-1"></a>    <span class="cf">if</span> divisor <span class="op">!=</span> <span class="dv">0.0</span> <span class="op">{</span></span>
+<span id="cb51-3"><a href="what-rust-taught-me-about-writing-better-c.html#cb51-3" tabindex="-1"></a>        <span class="cn">Some</span>(dividend <span class="op">/</span> divisor)</span>
+<span id="cb51-4"><a href="what-rust-taught-me-about-writing-better-c.html#cb51-4" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb51-5"><a href="what-rust-taught-me-about-writing-better-c.html#cb51-5" tabindex="-1"></a>        <span class="cn">None</span></span>
+<span id="cb51-6"><a href="what-rust-taught-me-about-writing-better-c.html#cb51-6" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb51-7"><a href="what-rust-taught-me-about-writing-better-c.html#cb51-7" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb51-8"><a href="what-rust-taught-me-about-writing-better-c.html#cb51-8" tabindex="-1"></a></span>
+<span id="cb51-9"><a href="what-rust-taught-me-about-writing-better-c.html#cb51-9" tabindex="-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb51-10"><a href="what-rust-taught-me-about-writing-better-c.html#cb51-10" tabindex="-1"></a>    <span class="kw">let</span> quotient <span class="op">=</span> divide(<span class="dv">5.0</span><span class="op">,</span> <span class="dv">0.0</span>)<span class="op">;</span></span>
+<span id="cb51-11"><a href="what-rust-taught-me-about-writing-better-c.html#cb51-11" tabindex="-1"></a>    <span class="cf">match</span> quotient <span class="op">{</span></span>
+<span id="cb51-12"><a href="what-rust-taught-me-about-writing-better-c.html#cb51-12" tabindex="-1"></a>        <span class="cn">Some</span>(value) <span class="op">=&gt;</span> <span class="pp">println!</span>(<span class="st">&quot;Division result: {value}&quot;</span>)<span class="op">,</span></span>
+<span id="cb51-13"><a href="what-rust-taught-me-about-writing-better-c.html#cb51-13" tabindex="-1"></a>        <span class="cn">None</span> <span class="op">=&gt;</span> <span class="pp">println!</span>(<span class="st">&quot;Division by zero occurred&quot;</span>)<span class="op">,</span></span>
+<span id="cb51-14"><a href="what-rust-taught-me-about-writing-better-c.html#cb51-14" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb51-15"><a href="what-rust-taught-me-about-writing-better-c.html#cb51-15" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div id="applying-this-to-c-1" class="section level4 hasAnchor" number="6.2.1.1">
+<h4><span class="header-section-number">6.2.1.1</span> Applying this to C++<a href="what-rust-taught-me-about-writing-better-c.html#applying-this-to-c-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>We can take advantage of the new <code>std::optional</code> and <code>std::expected</code> types. Here is the equivalent code using <code>std::optional</code>. Note that if the option is <code>std::nullopt</code>, calling <code>.value()</code> would throw, so we check it first.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb52-1"><a href="what-rust-taught-me-about-writing-better-c.html#cb52-1" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;print&gt;</span></span>
+<span id="cb52-2"><a href="what-rust-taught-me-about-writing-better-c.html#cb52-2" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;optional&gt;</span></span>
+<span id="cb52-3"><a href="what-rust-taught-me-about-writing-better-c.html#cb52-3" tabindex="-1"></a></span>
+<span id="cb52-4"><a href="what-rust-taught-me-about-writing-better-c.html#cb52-4" tabindex="-1"></a><span class="bu">std::</span>optional<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> divide<span class="op">(</span><span class="dt">double</span> dividend<span class="op">,</span> <span class="dt">double</span> divisor<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb52-5"><a href="what-rust-taught-me-about-writing-better-c.html#cb52-5" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>divisor <span class="op">!=</span> <span class="fl">0.0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb52-6"><a href="what-rust-taught-me-about-writing-better-c.html#cb52-6" tabindex="-1"></a>        <span class="cf">return</span> dividend <span class="op">/</span> divisor<span class="op">;</span>  <span class="co">// Equivalent to Some(value)</span></span>
+<span id="cb52-7"><a href="what-rust-taught-me-about-writing-better-c.html#cb52-7" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb52-8"><a href="what-rust-taught-me-about-writing-better-c.html#cb52-8" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">std::</span>nullopt<span class="op">;</span>        <span class="co">// Equivalent to None</span></span>
+<span id="cb52-9"><a href="what-rust-taught-me-about-writing-better-c.html#cb52-9" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb52-10"><a href="what-rust-taught-me-about-writing-better-c.html#cb52-10" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb52-11"><a href="what-rust-taught-me-about-writing-better-c.html#cb52-11" tabindex="-1"></a></span>
+<span id="cb52-12"><a href="what-rust-taught-me-about-writing-better-c.html#cb52-12" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb52-13"><a href="what-rust-taught-me-about-writing-better-c.html#cb52-13" tabindex="-1"></a>    <span class="kw">auto</span> quotient <span class="op">=</span> divide<span class="op">(</span><span class="fl">5.0</span><span class="op">,</span> <span class="fl">0.0</span><span class="op">);</span></span>
+<span id="cb52-14"><a href="what-rust-taught-me-about-writing-better-c.html#cb52-14" tabindex="-1"></a></span>
+<span id="cb52-15"><a href="what-rust-taught-me-about-writing-better-c.html#cb52-15" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>quotient<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb52-16"><a href="what-rust-taught-me-about-writing-better-c.html#cb52-16" tabindex="-1"></a>        <span class="bu">std::</span>println<span class="op">(</span><span class="st">&quot;Division result: </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> quotient<span class="op">.</span>value<span class="op">());</span></span>
+<span id="cb52-17"><a href="what-rust-taught-me-about-writing-better-c.html#cb52-17" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb52-18"><a href="what-rust-taught-me-about-writing-better-c.html#cb52-18" tabindex="-1"></a>        <span class="bu">std::</span>println<span class="op">(</span><span class="st">&quot;Division by zero occurred&quot;</span><span class="op">);</span></span>
+<span id="cb52-19"><a href="what-rust-taught-me-about-writing-better-c.html#cb52-19" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb52-20"><a href="what-rust-taught-me-about-writing-better-c.html#cb52-20" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</div>
+</div>
+<div id="result" class="section level3 hasAnchor" number="6.2.2">
+<h3><span class="header-section-number">6.2.2</span> <code>Result</code><a href="what-rust-taught-me-about-writing-better-c.html#result" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Similar to how an <code>Option</code> is either <code>Some</code> or <code>None</code>, a <code>Result</code> is either <code>Ok</code> or <code>Err</code>. While an <code>Option</code> only signals the absence of a value, a <code>Result</code> contains information about <em>why</em> it failed (such as an error string).</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb53-1"><a href="what-rust-taught-me-about-writing-better-c.html#cb53-1" tabindex="-1"></a><span class="kw">fn</span> parse_int(s<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span>) <span class="op">-&gt;</span> <span class="dt">Result</span><span class="op">&lt;</span><span class="dt">i32</span><span class="op">,</span> <span class="dt">String</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb53-2"><a href="what-rust-taught-me-about-writing-better-c.html#cb53-2" tabindex="-1"></a>    <span class="cf">if</span> s<span class="op">.</span>is_empty() <span class="op">{</span></span>
+<span id="cb53-3"><a href="what-rust-taught-me-about-writing-better-c.html#cb53-3" tabindex="-1"></a>        <span class="cf">return</span> <span class="cn">Err</span>(<span class="st">&quot;Empty string&quot;</span><span class="op">.</span>to_string())<span class="op">;</span></span>
+<span id="cb53-4"><a href="what-rust-taught-me-about-writing-better-c.html#cb53-4" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb53-5"><a href="what-rust-taught-me-about-writing-better-c.html#cb53-5" tabindex="-1"></a></span>
+<span id="cb53-6"><a href="what-rust-taught-me-about-writing-better-c.html#cb53-6" tabindex="-1"></a>    s<span class="op">.</span><span class="pp">parse::</span><span class="op">&lt;</span><span class="dt">i32</span><span class="op">&gt;</span>()<span class="op">.</span>map_err(<span class="op">|</span>_<span class="op">|</span> <span class="st">&quot;Invalid number&quot;</span><span class="op">.</span>to_string())</span>
+<span id="cb53-7"><a href="what-rust-taught-me-about-writing-better-c.html#cb53-7" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb53-8"><a href="what-rust-taught-me-about-writing-better-c.html#cb53-8" tabindex="-1"></a></span>
+<span id="cb53-9"><a href="what-rust-taught-me-about-writing-better-c.html#cb53-9" tabindex="-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb53-10"><a href="what-rust-taught-me-about-writing-better-c.html#cb53-10" tabindex="-1"></a>    <span class="kw">let</span> res <span class="op">=</span> parse_int(<span class="st">&quot;&quot;</span>)<span class="op">;</span></span>
+<span id="cb53-11"><a href="what-rust-taught-me-about-writing-better-c.html#cb53-11" tabindex="-1"></a></span>
+<span id="cb53-12"><a href="what-rust-taught-me-about-writing-better-c.html#cb53-12" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">let</span> <span class="cn">Err</span>(e) <span class="op">=</span> res <span class="op">{</span></span>
+<span id="cb53-13"><a href="what-rust-taught-me-about-writing-better-c.html#cb53-13" tabindex="-1"></a>        <span class="pp">eprintln!</span>(<span class="st">&quot;{}&quot;</span><span class="op">,</span> e)<span class="op">;</span></span>
+<span id="cb53-14"><a href="what-rust-taught-me-about-writing-better-c.html#cb53-14" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb53-15"><a href="what-rust-taught-me-about-writing-better-c.html#cb53-15" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div id="applying-this-to-c-2" class="section level4 hasAnchor" number="6.2.2.1">
+<h4><span class="header-section-number">6.2.2.1</span> Applying this to C++<a href="what-rust-taught-me-about-writing-better-c.html#applying-this-to-c-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>C++ has a similar type called <code>std::expected&lt;T, E&gt;</code>:</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb54-1"><a href="what-rust-taught-me-about-writing-better-c.html#cb54-1" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;expected&gt;</span></span>
+<span id="cb54-2"><a href="what-rust-taught-me-about-writing-better-c.html#cb54-2" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;print&gt;</span></span>
+<span id="cb54-3"><a href="what-rust-taught-me-about-writing-better-c.html#cb54-3" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string&gt;</span></span>
+<span id="cb54-4"><a href="what-rust-taught-me-about-writing-better-c.html#cb54-4" tabindex="-1"></a></span>
+<span id="cb54-5"><a href="what-rust-taught-me-about-writing-better-c.html#cb54-5" tabindex="-1"></a><span class="bu">std::</span>expected<span class="op">&lt;</span><span class="dt">int</span><span class="op">,</span> <span class="bu">std::</span>string<span class="op">&gt;</span> parse_int<span class="op">(</span><span class="bu">std::</span>string s<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb54-6"><a href="what-rust-taught-me-about-writing-better-c.html#cb54-6" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>s<span class="op">.</span>empty<span class="op">())</span> <span class="cf">return</span> <span class="bu">std::</span>unexpected<span class="op">(</span><span class="st">&quot;Empty string&quot;</span><span class="op">);</span></span>
+<span id="cb54-7"><a href="what-rust-taught-me-about-writing-better-c.html#cb54-7" tabindex="-1"></a>    <span class="cf">try</span> <span class="op">{</span></span>
+<span id="cb54-8"><a href="what-rust-taught-me-about-writing-better-c.html#cb54-8" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">std::</span>stoi<span class="op">(</span>s<span class="op">);</span></span>
+<span id="cb54-9"><a href="what-rust-taught-me-about-writing-better-c.html#cb54-9" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">catch</span> <span class="op">(...)</span> <span class="op">{</span></span>
+<span id="cb54-10"><a href="what-rust-taught-me-about-writing-better-c.html#cb54-10" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">std::</span>unexpected<span class="op">(</span><span class="st">&quot;Invalid number&quot;</span><span class="op">);</span></span>
+<span id="cb54-11"><a href="what-rust-taught-me-about-writing-better-c.html#cb54-11" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb54-12"><a href="what-rust-taught-me-about-writing-better-c.html#cb54-12" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb54-13"><a href="what-rust-taught-me-about-writing-better-c.html#cb54-13" tabindex="-1"></a></span>
+<span id="cb54-14"><a href="what-rust-taught-me-about-writing-better-c.html#cb54-14" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb54-15"><a href="what-rust-taught-me-about-writing-better-c.html#cb54-15" tabindex="-1"></a>    <span class="kw">auto</span> res <span class="op">=</span> parse_int<span class="op">(</span><span class="st">&quot;&quot;</span><span class="op">);</span></span>
+<span id="cb54-16"><a href="what-rust-taught-me-about-writing-better-c.html#cb54-16" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(!</span>res<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb54-17"><a href="what-rust-taught-me-about-writing-better-c.html#cb54-17" tabindex="-1"></a>        <span class="bu">std::</span>println<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;</span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> res<span class="op">.</span>error<span class="op">());</span></span>
+<span id="cb54-18"><a href="what-rust-taught-me-about-writing-better-c.html#cb54-18" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb54-19"><a href="what-rust-taught-me-about-writing-better-c.html#cb54-19" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<p>Although C++ does not have a borrow checker, we don’t necessarily need to rewrite entire projects in Rust to see benefits. By making use of modern C++ features that improve memory safety and type safety, we can eliminate many common bugs. C++ projects can “borrow” useful ideas from Rust, and developers can choose the best tool for the job with a more critical eye on safety.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="removing-outliers-for-machine-learning.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/VarunVF/VarunVF.github.io/edit/main/06-rustcpp.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["VarunVF's-Projects.pdf", "VarunVF's-Projects.epub", "VarunVF's-Projects.mobi"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

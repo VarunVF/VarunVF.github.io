@@ -1,0 +1,156 @@
+# What Rust Taught Me About Writing Better C++
+
+In my personal projects, I usually default to C++ for anything involving low-level systems. Recently, I've heard a lot about Rust and its various memory and type safety measures, so I decided to give it a try. After spending some time learning about Rust (and trying to write better C++), I'm sharing some features I liked and how these concepts can be applied to write better C++ code.
+
+In each section, I'll go over one Rust feature I found interesting, and show how we can replicate it in C++ (using C++23).
+
+---
+
+## Pattern matching
+Rust has powerful pattern matching via the `match` expression. Each branch in a `match` expression is called a 'match arm'. Pattern matching is supported in the left-hand side of these arms. In the example below, the last match arm uses the wildcard `_`. This is a catch-all that is reached if none of the arms above it match.
+
+```rust
+fn main() {
+    let number = 3;
+
+    let description = match number {
+        1 => "one",
+        2 => "two",
+        3 => "three",
+        _ => "something else",
+    };
+
+    println!("Number is: {}", description);
+}
+```
+
+Because `match` is an expression, it has been used here to return a value, which makes the code more concise. Match arms even support [guards](https://doc.rust-lang.org/rust-by-example/flow_control/match/guard.html) to filter the arm. With `match` expressions, the Rust compiler forces you to handle all possible cases. In C++, you must remember to write each case of a switch statement, or provide a `default`. (You also need to remember to add `break;` for each case to prevent accidental fallthrough.)
+
+In addition to the `match` expression, there are also expressions like `if let` and `let else`, and the `matches!` macro, which are all tools for pattern matching with different uses.
+
+#### Applying this to C++
+
+For now, C++ does this using a `switch` statement. [Perhaps in future C++ versions](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2020/p1371r3.pdf), we will have a direct equivalent to Rust's `match` expressions. However, we can make `switch` act like an expression by wrapping it in a lambda that gets immediately called.
+
+```cpp
+#include <print>
+#include <string_view>
+
+int main() {
+    int number = 3;
+
+    // Use a lambda to make the switch act like an expression
+    std::string_view description = [number] {
+        switch (number) {
+            case 1:  return "one";
+            case 2:  return "two";
+            case 3:  return "three";
+            default: return "something else";
+        }
+    }(); // The () at the end calls the lambda immediately
+
+    std::println("Number is: {}", description);
+}
+```
+
+## Errors as values
+Idiomatic Rust encourages explicit error handling. Unlike other languages like C++ or Python where exceptions are a side-channel result of functions, in Rust errors are directly values. There are two main ways to represent such values in Rust: `Option` and `Result`. Once we have an `Option` or `Result`, we can `match` on its value or call methods like `is_some()` or `is_ok()` to check its state. 
+
+### `Option`
+An `Option` is used to indicate that a value may or may not be available. This is safer than returning a null pointer, for example, because it obliges the caller to handle the possibility that no value is present.
+
+```rust
+fn divide(dividend: f64, divisor: f64) -> Option<f64> {
+    if divisor != 0.0 {
+        Some(dividend / divisor)
+    } else {
+        None
+    }
+}
+
+fn main() {
+    let quotient = divide(5.0, 0.0);
+    match quotient {
+        Some(value) => println!("Division result: {value}"),
+        None => println!("Division by zero occurred"),
+    }
+}
+```
+
+#### Applying this to C++
+
+We can take advantage of the new `std::optional` and `std::expected` types. Here is the equivalent code using `std::optional`. Note that if the option is `std::nullopt`, calling `.value()` would throw, so we check it first.
+
+```cpp
+#include <print>
+#include <optional>
+
+std::optional<double> divide(double dividend, double divisor) {
+    if (divisor != 0.0) {
+        return dividend / divisor;  // Equivalent to Some(value)
+    } else {
+        return std::nullopt;        // Equivalent to None
+    }
+}
+
+int main() {
+    auto quotient = divide(5.0, 0.0);
+
+    if (quotient) {
+        std::println("Division result: {}", quotient.value());
+    } else {
+        std::println("Division by zero occurred");
+    }
+}
+```
+
+### `Result`
+
+Similar to how an `Option` is either `Some` or `None`, a `Result` is either `Ok` or `Err`. While an `Option` only signals the absence of a value, a `Result` contains information about *why* it failed (such as an error string).
+
+```rust
+fn parse_int(s: &str) -> Result<i32, String> {
+    if s.is_empty() {
+        return Err("Empty string".to_string());
+    }
+
+    s.parse::<i32>().map_err(|_| "Invalid number".to_string())
+}
+
+fn main() {
+    let res = parse_int("");
+
+    if let Err(e) = res {
+        eprintln!("{}", e);
+    }
+}
+```
+#### Applying this to C++
+
+C++ has a similar type called `std::expected<T, E>`:
+
+```cpp
+#include <expected>
+#include <print>
+#include <string>
+
+std::expected<int, std::string> parse_int(std::string s) {
+    if (s.empty()) return std::unexpected("Empty string");
+	try {
+		return std::stoi(s);
+	} catch (...) {
+		return std::unexpected("Invalid number");
+	}
+}
+
+int main() {
+    auto res = parse_int("");
+    if (!res) {
+        std::println(stderr, "{}", res.error());
+    }
+}
+```
+
+---
+
+Although C++ does not have a borrow checker, we don't necessarily need to rewrite entire projects in Rust to see benefits. By making use of modern C++ features that improve memory safety and type safety, we can eliminate many common bugs. C++ projects can "borrow" useful ideas from Rust, and developers can choose the best tool for the job with a more critical eye on safety.

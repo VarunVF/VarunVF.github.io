@@ -55,3 +55,11 @@ interquartile-range-iqr
 z-score
 example
 conclusion
+what-rust-taught-me-about-writing-better-c
+pattern-matching
+applying-this-to-c
+errors-as-values
+option
+applying-this-to-c-1
+result
+applying-this-to-c-2

@@ -93,11 +93,13 @@
 .tag-glsl { background-color: #33cccc80; color: #196666; }
 .tag-java { background-color: #f8982080; color: #7c4c10; }
 .tag-cpp { background-color: #5599ff80; color: #2a4c7f; }
+.tag-rust { background-color: #ce422b40; color: #cc3920; }
 .tag-ml { background-color: #9900cc80; color: #4c0066; }
 .tag-python { background-color: #e7dc0780; color: #736e03; }
 /* No override for Sepia Theme */
 .color-theme-2 .tag-glsl { background-color: #33cccc40; color: #33cccc; }
 .color-theme-2 .tag-java { background-color: #f8982040; color: #f89820; }
 .color-theme-2 .tag-cpp { background-color: #5599ff40; color: #5599ff; }
+.color-theme-2 .tag-rust { background-color: #ce422b40; color: #ce422b; }
 .color-theme-2 .tag-ml { background-color: #9900cc40; color: #aa44ee; }
 .color-theme-2 .tag-python { background-color: #e7dc0740; color: #e7dc07; }

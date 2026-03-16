@@ -16,6 +16,14 @@ Here are some of the projects and articles I've done.
 ::: {.project-grid}
 
 ::: {.project-card}
+<strong>What Rust Taught Me About Writing Better C++</strong><br />
+Exploring how we can write better C++ code by borrowing useful concepts from Rust.<br />
+<span class="tag tag-rust">rust</span>
+<span class="tag tag-cpp">cpp</span><br />
+<a href="what-rust-taught-me-about-writing-better-c.html" class="custom-btn">Read More</a>
+:::
+
+::: {.project-card}
 <strong>Writing Minecraft Shaders</strong><br />
 My experience learning how to write shaders for Minecraft and several things I learnt about computer graphics along the way.<br />
 <span class="tag tag-glsl">glsl</span><br />
