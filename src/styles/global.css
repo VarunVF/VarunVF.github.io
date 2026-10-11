@@ -84,7 +84,14 @@ input {
 	font-size: 16px;
 }
 table {
+	table-layout: auto;
 	width: 100%;
+	border: 2px solid #cbd5e1;
+	border-collapse: collapse;
+}
+th, td {
+	border: 1.5px solid #cbd5e1;
+	padding: 4px 8px;
 }
 img {
 	max-width: 100%;
