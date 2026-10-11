@@ -2,16 +2,26 @@
 
 import sitemap from '@astrojs/sitemap';
 import { defineConfig, fontProviders } from 'astro/config';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+import { unified } from '@astrojs/markdown-remark';
+import mdx from '@astrojs/mdx';
 
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://example.com',
-	integrations: [sitemap()],
+	integrations: [mdx(), sitemap()],
 	redirects: {
 		'/my-experience-learning-to-write-shaders.html': '/blog/writing-shaders',
 		'/bridging-java-to-c-idiomatic-differences-and-best-practices.html': '/blog/java-cpp',
 		'/removing-outliers-for-machine-learning.html': '/blog/removing-outliers',
 		'/what-rust-taught-me-about-writing-better-c.html': '/blog/rust-cpp',
+	},
+	markdown: {
+		processor: unified({
+			remarkPlugins: [remarkMath],
+			rehypePlugins: [rehypeKatex]
+		})
 	},
 	fonts: [
 		{

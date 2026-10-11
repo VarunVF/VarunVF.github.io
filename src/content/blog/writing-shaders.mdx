@@ -5,6 +5,8 @@ pubDate: 'Dec 08 2025'
 heroImage: '../../assets/writing-shaders/showcase-1.png'
 ---
 
+import 'katex/dist/katex.min.css';
+
 ## The Spark
 
 When I played Minecraft Pocket Edition (MCPE) years ago on my phone, my favourite shader was Entropy Shaders for Bedrock Edition (ESBE), written by McbeEringi. It not only greatly enhanced the visuals of the game, but also improved performance so that the game was much more playable on my phone.
@@ -31,7 +33,7 @@ However, we can write it simpler the following way by using `dot` (vector dot pr
 float grayscale = dot(color, vec3(1.0 / 3.0));
 ```
 
-This same concept of 'thinking in parallel' also applies when doing transformations from one space to another. Instead of 'manually' applying translation, scale, and rotation by accessing the position attribute directly, it's simpler and more flexible to use Model, View and Projection matrices to apply transformations using matrix multiplication. (This links back to our discussion on [coordinate spaces](#Coordinate%20Spaces) earlier.) Minecraft and most 3D graphics programs apply this same principle.
+This same concept of 'thinking in parallel' also applies when doing transformations from one space to another. Instead of 'manually' applying translation, scale, and rotation by accessing the position attribute directly, it's simpler and more flexible to use Model, View and Projection matrices to apply transformations using matrix multiplication. (This links to the following discussion on [coordinate spaces](#coordinate-spaces).) Minecraft and most 3D graphics programs apply this same principle.
 
 ## Coordinate Spaces
 
@@ -47,14 +49,14 @@ Here's a summary I wrote of the core spaces and the transformations done between
 | Local Space | World Space  | Model Matrix       | Place the object in the world                                            |
 | World Space | View Space   | View Matrix        | Place the world from the camera's POV                                    |
 | View Space  | Clip Space   | Projection Matrix  | Project 3D coordinates onto a 2D plane, and prepare for clipping         |
-| Clip Space  | NDC Space    | Perspective Divide | Divide by the homogenous coordinate `w` to get vertices in $[-1.0, 1.0]$ |
+| Clip Space  | NDC Space    | Perspective Divide | Divide by the homogenous coordinate $w$ to get vertices in $[-1.0, 1.0]$ |
 | NDC Space   | Screen Space | Viewport Transform | Map NDC coords to screen coords, using the settings of `glViewport`      |
 
 You can find more detail about these coordinate spaces and more on the [LearnOpenGL lesson](https://learnopengl.com/Getting-started/Coordinate-Systems), and the [Iris Shaders documentation page](https://shaders.properties/current/how-to/coordinate_spaces/).
 
 ## Deferred Shading
 
-One thing that initially confused me was why lighting wasn’t calculated immediately in the geometry pass. It turns out Minecraft uses something called [deferred shading](https://learnopengl.com/Advanced-Lighting/Deferred-Shading). As scenes get more complex, doing geometry and lighting calculations in one pass can be wasteful as fragment shader output gets obscured by other objects that end up getting rendered on top.
+One thing that initially confused me was why lighting wasn't calculated immediately in the geometry pass. It turns out Minecraft uses something called [deferred shading](https://learnopengl.com/Advanced-Lighting/Deferred-Shading). As scenes get more complex, doing geometry and lighting calculations in one pass can be wasteful as fragment shader output gets obscured by other objects that end up getting rendered on top.
 
 Leaving lighting for a later stage makes lighting calculations faster by storing geometry information such as normals, depth, and color into a set of buffers. These buffers are called g-buffers, and are written to in the geometry pass (in the `gbuffers_*` programs). This information is then used in the lighting pass, such as in the `composite` fullscreen pass, to shade the scene.
 
@@ -139,9 +141,9 @@ While looking through ESBE source (it's also on GitHub under MIT license), I fou
 
 ```glsl
 #ifdef GL_FRAGMENT_PRECISION_HIGH
-        #define HM highp
+        #define HM highp
 #else
-        #define HM mediump
+        #define HM mediump
 #endif
 ```
 
@@ -155,15 +157,15 @@ With this, the same source code can successfully compile on multiple devices, ev
 
 ## My Current Progress
 
-So far, I’ve managed to get a small but working shader pipeline running. My shader currently has basic deferred lighting, simple shadows, and some small post-processing effects like custom fog and contrast adjustments. Along the way I encountered some funny rendering bugs, like entity eyes disappearing when I forgot to define the right program. I'm still learning, and my shader is far from perfect, but there's something fascinating about being able to execute my code from within Minecraft and see its effects in real time.
+So far, I've managed to get a small but working shader pipeline running. My shader currently has basic deferred lighting, simple shadows, and some small post-processing effects like custom fog and contrast adjustments. Along the way I encountered some funny rendering bugs, like entity eyes disappearing when I forgot to define the right program. I'm still learning, and my shader is far from perfect, but there's something fascinating about being able to execute my code from within Minecraft and see its effects in real time.
 
 ![](../../assets/writing-shaders/showcase-1.png)
 
 ![](../../assets/writing-shaders/showcase-2.png)
 
-I’m still very early in this journey, and there’s a lot I want to explore next: soft shadows, better sky rendering, prettier water, and a better day/night cycle for lighting to name a few. Mostly, I’m trying to learn in small steps: modifying existing code, experimenting, and asking questions when something doesn’t behave as expected. Sometimes, I'll graph things out on [Desmos](https://www.desmos.com/calculator) to make sure an idea is mathematically sound before I implement it in code.
+I'm still very early in this journey, and there's a lot I want to explore next: soft shadows, better sky rendering, prettier water, and a better day/night cycle for lighting to name a few. Mostly, I'm trying to learn in small steps: modifying existing code, experimenting, and asking questions when something doesn't behave as expected. Sometimes, I'll graph things out on [Desmos](https://www.desmos.com/calculator) to make sure an idea is mathematically sound before I implement it in code.
 
-Before starting this project, I couldn't fathom how games like Minecraft were able to render such complex scenes to the screen. It felt like magic to me. Now, I'm glad that I understand even a tiny part of what’s happening under the hood.
+Before starting this project, I couldn't fathom how games like Minecraft were able to render such complex scenes to the screen. It felt like magic to me. Now, I'm glad that I understand even a tiny part of what's happening under the hood.
 
 ## Resources
 
