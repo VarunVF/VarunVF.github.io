@@ -33,7 +33,7 @@ Because `match` is an expression, it has been used here to return a value, which
 
 In addition to the `match` expression, there are also expressions like `if let` and `let else`, and the `matches!` macro, which are all tools for pattern matching with different uses.
 
-#### Applying this to C++
+### Applying this to C++
 
 For now, C++ does this using a `switch` statement. [Perhaps in future C++ versions](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2020/p1371r3.pdf), we will have a direct equivalent to Rust's `match` expressions. However, we can make `switch` act like an expression by wrapping it in a lambda that gets immediately called.
 
