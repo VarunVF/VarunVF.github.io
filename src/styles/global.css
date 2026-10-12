@@ -5,16 +5,18 @@
  */
 
 :root {
-	--accent: #2337ff;
-	--accent-dark: #000d8a;
+	--accent: #92a5fa;
+	--accent-mid: #22327a;
+	--accent-dark: #0a0d3d;
 	--black: 15, 18, 25;
+	--black-dark: 7, 9, 13;
 	--gray: 96, 115, 159;
 	--gray-light: 229, 233, 240;
 	--gray-dark: 34, 41, 57;
-	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
+	--gray-gradient: rgb(var(--black)), rgb(var(--black-dark));
 	--box-shadow:
-		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
-		0 16px 32px rgba(var(--gray), 33%);
+		0 2px 6px rgba(var(--gray-dark), 25%), 0 8px 24px rgba(var(--gray-dark), 33%),
+		0 16px 32px rgba(var(--gray-dark), 33%);
 }
 body {
 	font-family: var(--font-atkinson);
@@ -23,9 +25,10 @@ body {
 	text-align: left;
 	background: linear-gradient(var(--gray-gradient)) no-repeat;
 	background-size: 100% 600px;
+	background-color: rgb(var(--black-dark));
 	word-wrap: break-word;
 	overflow-wrap: break-word;
-	color: rgb(var(--gray-dark));
+	color: rgb(var(--gray-light));
 	font-size: 20px;
 	line-height: 1.7;
 }
@@ -42,7 +45,7 @@ h4,
 h5,
 h6 {
 	margin: 0 0 0.5rem 0;
-	color: rgb(var(--black));
+	color: rgb(var(--gray-light));
 	line-height: 1.2;
 }
 h1 {
@@ -86,12 +89,16 @@ input {
 table {
 	table-layout: auto;
 	width: 100%;
-	border: 2px solid #cbd5e1;
+	border: 2px solid var(--accent);
 	border-collapse: collapse;
 	margin: 2rem 0;
 }
-th, td {
-	border: 1.5px solid #cbd5e1;
+th {
+	border: 2px solid var(--accent);
+	padding: 4px 8px;
+}
+td {
+	border: 1.5px solid var(--accent);
 	padding: 4px 8px;
 }
 img {
@@ -101,7 +108,7 @@ img {
 }
 code {
 	padding: 2px 5px;
-	background-color: rgb(var(--gray-light));
+	background-color: var(--accent-mid);
 	border-radius: 2px;
 }
 pre {
